@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToDoIt.Models
 {
-    class Todo
+    public class Todo
     {
         private readonly int todoId;
         private String description;
@@ -12,7 +12,7 @@ namespace ToDoIt.Models
         private Person assignee;
 
         public int TodoId { get; set; }
-        private String Description { get; set; }
+        public String Description { get; set; }
         public bool Done { get; set; }
         public Person Assignee { get; set; }
 
