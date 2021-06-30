@@ -1,7 +1,7 @@
 using Xunit;
 using ToDoIt.Models;
 
-namespace ToDoIt.Tests
+namespace ToDoIt.Tests.Models
 {
     public class PersonTests
     {
