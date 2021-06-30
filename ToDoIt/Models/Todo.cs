@@ -11,15 +11,27 @@ namespace ToDoIt.Models
         private bool done;
         private Person assignee;
 
-        public int TodoId { get; set; }
+        public int TodoId
+        {
+            get { return todoId; }
+        }
         public String Description { get; set; }
         public bool Done { get; set; }
         public Person Assignee { get; set; }
 
         public Todo(int todoId, String description)
         {
-            TodoId = todoId;
+            this.todoId = todoId;
             Description = description;
+        }
+        public Todo(
+            int todoId,
+            String description,
+            bool done,
+            Person assignee
+            )
+            : this(todoId, description)
+        {
             Done = done;
             Assignee = assignee;
         }
