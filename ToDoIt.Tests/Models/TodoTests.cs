@@ -10,8 +10,8 @@ namespace ToDoIt.Tests.Models
         public void Todo_TestMinimalInput()
         {
             // Arrange
-            int todoId = 0;
-            String description = "Buy milk";
+            int todoId = 1;
+            String description = "Buy coconut milk";
             bool done = false;
             Person assignee = null;
 
@@ -29,10 +29,10 @@ namespace ToDoIt.Tests.Models
         public void Todo_TestFullInput()
         {
             // Arrange
-            int todoId = 0;
-            String description = "Buy milk";
-            bool done = false;
-            Person assignee = new Person("John", "Doe", 0);
+            int todoId = 2;
+            String description = "Buy almond milk";
+            bool done = true;
+            Person assignee = new Person("Jane", "Doe", 1);
 
             // Act
             Todo testTodo = new Todo(todoId, description, done, assignee);
