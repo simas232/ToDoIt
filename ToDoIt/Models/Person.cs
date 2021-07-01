@@ -5,9 +5,9 @@ namespace ToDoIt.Models
     public class Person
     {
         // Fields
-        private string firstName; // Get, set to have ability to change
+        private string firstName; 
         private string lastName;
-        public readonly int personId; // readonly cuz PersonId 
+        private readonly int personId; // readonly cuz PersonId 
 
 
         // Properties to link to files (object)
@@ -35,7 +35,7 @@ namespace ToDoIt.Models
                 lastName = value;
             }
         }
-        public int PersonId { get; set; }
+        public int PersonId { get; set; } // Get,set to have ability to change
 
         // Constructor
         public Person(string firstName, string lastName, int personId)
