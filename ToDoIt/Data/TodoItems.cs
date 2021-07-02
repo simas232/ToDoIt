@@ -8,5 +8,10 @@ namespace ToDoIt.Data
     public class TodoItems
     {
         private static Todo[] todoArray = new Todo[0];
+        public static Todo[] TodoArray
+        {
+            get { return todoArray; }
+            set { todoArray = value; }
+        }
     }
 }
