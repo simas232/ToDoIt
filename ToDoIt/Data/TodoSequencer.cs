@@ -11,7 +11,6 @@
 
         public static int NextTodoId()
         {
-            TodoId = todoId;
             return ++TodoId;
         }
 
