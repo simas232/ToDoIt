@@ -22,5 +22,16 @@ namespace ToDoIt.Data
         {
             return ArrPerson;
         }
+        public static Person FindById(int personId)
+        {
+            foreach (Person item in ArrPerson)
+            {
+                if (item.PersonId == personId)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }
