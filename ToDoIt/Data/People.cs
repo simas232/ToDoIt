@@ -18,5 +18,9 @@ namespace ToDoIt.Data
         {
             return ArrPerson.Length;
         }
+        public static Person[] FindAll()
+        {
+            return ArrPerson;
+        }
     }
 }
