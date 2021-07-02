@@ -33,5 +33,21 @@ namespace ToDoIt.Data
             }
             return null;
         }
+        public static Person AddPerson(string firstName, string lastName)
+        {   //Creating the new person as object        
+            Person addNewPerson = new Person(firstName, lastName, PersonSequencer.NextPersonId());
+
+            //creating a new blank array which is longer then
+            Person[] tempArray = new Person[Size() + 1];
+
+            //Copy all ArrPerson data to tempArray
+            Array.Copy(FindAll(), tempArray, Size());
+
+            //tempArry here gain the data from new created personal object
+            tempArray[Size() - 1] = addNewPerson;
+
+            ArrPerson = tempArray;
+            return addNewPerson;
+        }
     }
 }
