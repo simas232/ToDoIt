@@ -13,5 +13,10 @@ namespace ToDoIt.Data
             get {​​​​​​​ return arrPerson; }​​​​​​​
             set {​​​​​​​ arrPerson = value; }​​​​​​​
         }​​​​​​​
+
+        public static int Size()
+        {
+            return ArrPerson.Length;
+        }
     }
 }
