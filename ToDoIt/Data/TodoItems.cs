@@ -18,5 +18,10 @@ namespace ToDoIt.Data
         {
             return TodoArray.Length;
         }
+
+        public static Todo[] FindAll()
+        {
+            return TodoArray;
+        }
     }
 }
