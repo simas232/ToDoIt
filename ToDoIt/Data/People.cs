@@ -7,5 +7,6 @@ namespace ToDoIt.Data
 {
     public class People
     {
+        private static Person[] arrPerson = new Person[0];
     }
 }
