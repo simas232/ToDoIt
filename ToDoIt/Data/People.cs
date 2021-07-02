@@ -8,5 +8,10 @@ namespace ToDoIt.Data
     public class People
     {
         private static Person[] arrPerson = new Person[0];
+        public static Person[] ArrPerson
+        { ​​​​​​​
+            get {​​​​​​​ return arrPerson; }​​​​​​​
+            set {​​​​​​​ arrPerson = value; }​​​​​​​
+        }​​​​​​​
     }
 }
