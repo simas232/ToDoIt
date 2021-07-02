@@ -13,5 +13,10 @@ namespace ToDoIt.Data
             get { return todoArray; }
             set { todoArray = value; }
         }
+
+        public static int Size()
+        {
+            return TodoArray.Length;
+        }
     }
 }
