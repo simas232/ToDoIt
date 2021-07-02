@@ -7,5 +7,6 @@ namespace ToDoIt.Data
 {
     public class TodoItems
     {
+        private static Todo[] todoArray = new Todo[0];
     }
 }
