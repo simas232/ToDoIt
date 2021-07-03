@@ -10,22 +10,20 @@ namespace ToDoIt.Tests.Data
     public class PeopleTests
     {
         [Fact]
-        public void checkAddPersonTest()
+        public void CheckAddPersonTest()
         {
             // Arrange
-            //string firstName = "Simons";
-            //string lastName = "Gothenburg";
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
 
             // Act
-            //Person testPersons = People.AddPerson(firstName, lastName);
+            People testPeople = new People();
+            Person testPerson = testPeople.AddPerson(firstName, lastName);
 
             // Assert        
-            //Assert.Equal(firstName, testPersons.FirstName);
-            //Assert.Equal(lastName, testPersons.LastName);
-            //Assert.Equal(0, testPersons.PersonId);
-
-            Assert.Equal(4, People.Size());
-
+            Assert.Equal(firstName, testPerson.FirstName);
+            Assert.Equal(lastName, testPerson.LastName);
+            Assert.Equal(1, testPerson.PersonId);
         }
 
     }
