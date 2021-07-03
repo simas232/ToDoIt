@@ -6,11 +6,13 @@ namespace ToDoIt.Models
 {
     public class Todo
     {
+        // Fields
         private readonly int todoId;
         private String description;
         private bool done;
         private Person assignee;
 
+        // Properties
         public int TodoId
         {
             get { return todoId; }
@@ -49,6 +51,7 @@ namespace ToDoIt.Models
             }
         }
 
+        // Constructors
         public Todo(int todoId, String description)
         {
             this.todoId = todoId;
