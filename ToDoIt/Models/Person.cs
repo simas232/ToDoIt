@@ -35,14 +35,14 @@ namespace ToDoIt.Models
                 lastName = value;
             }
         }
-        public int PersonId { get; set; } // Get,set to have ability to change
+        public int PersonId { get { return personId; } } // Get,set to have ability to change
 
         // Constructor
         public Person(string firstName, string lastName, int personId)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.PersonId = personId;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.personId = personId;
         }
     }
 }

@@ -9,11 +9,10 @@ namespace ToDoIt.Data
     {
         private static Person[] arrPerson = new Person[0];
         public static Person[] ArrPerson
-        { ​​​​​​​
-            get {​​​​​​​ return arrPerson; }​​​​​​​
-            set {​​​​​​​ arrPerson = value; }​​​​​​​
+        {
+            get {​​​​​​return arrPerson; }
+            set {​​​​​​​arrPerson = value; }
         }​​​​​​​
-
         public static int Size()
         {
             return ArrPerson.Length;

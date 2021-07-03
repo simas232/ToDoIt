@@ -14,7 +14,7 @@ namespace ToDoIt.Tests.Data
         {
             // Arrange
             //string firstName = "Simons";
-            //string lastName = "Gothenberg";
+            //string lastName = "Gothenburg";
 
             // Act
             //Person testPersons = People.AddPerson(firstName, lastName);
