@@ -24,16 +24,5 @@ namespace ToDoIt.Models
             this.todoId = todoId;
             Description = description;
         }
-        public Todo(
-            int todoId,
-            String description,
-            bool done,
-            Person assignee
-            )
-            : this(todoId, description)
-        {
-            Done = done;
-            Assignee = assignee;
-        }
     }
 }
