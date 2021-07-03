@@ -18,7 +18,7 @@ namespace ToDoIt.Data
             {
                 arrPerson = value;
             }
-        } // Get,set to have ability to change
+        }
 
         public static int Size()
         {
