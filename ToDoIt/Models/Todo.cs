@@ -53,6 +53,8 @@ namespace ToDoIt.Models
         {
             this.todoId = todoId;
             Description = description;
+            Done = done;
+            Assignee = assignee;
         }
     }
 }
