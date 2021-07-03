@@ -4,9 +4,16 @@
     {
         private static int todoId;
 
-        public static int TodoId {
-            get { return todoId; }
-            set { todoId = value; }
+        public static int TodoId
+        {
+            get
+            {
+                return todoId;
+            }
+            set
+            {
+                todoId = value;
+            }
         }
 
         public static int NextTodoId()
