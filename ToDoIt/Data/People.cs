@@ -8,7 +8,7 @@ namespace ToDoIt.Data
     public class People
     {
         private static Person[] arrPerson = new Person[0];
-        public static Person[] ArrPerson
+        public Person[] ArrPerson
         {
             get
             {
@@ -20,15 +20,15 @@ namespace ToDoIt.Data
             }
         }
 
-        public static int Size()
+        public int Size()
         {
             return ArrPerson.Length;
         }
-        public static Person[] FindAll()
+        public Person[] FindAll()
         {
             return ArrPerson;
         }
-        public static Person FindById(int personId)
+        public Person FindById(int personId)
         {
             foreach (Person item in ArrPerson)
             {
@@ -39,7 +39,7 @@ namespace ToDoIt.Data
             }
             return null;
         }
-        public static Person AddPerson(string firstName, string lastName)
+        public Person AddPerson(string firstName, string lastName)
         {   //Creating the new person as object        
             Person addNewPerson = new Person(firstName, lastName, PersonSequencer.NextPersonId());
 
