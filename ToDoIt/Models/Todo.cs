@@ -15,9 +15,39 @@ namespace ToDoIt.Models
         {
             get { return todoId; }
         }
-        public String Description { get; set; }
-        public bool Done { get; set; }
-        public Person Assignee { get; set; }
+        public String Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
+        public bool Done
+        {
+            get
+            {
+                return done;
+            }
+            set
+            {
+                done = value;
+            }
+        }
+        public Person Assignee
+        {
+            get
+            {
+                return assignee;
+            }
+            set
+            {
+                assignee = value;
+            }
+        }
 
         public Todo(int todoId, String description)
         {
