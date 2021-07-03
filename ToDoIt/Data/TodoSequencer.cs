@@ -2,8 +2,10 @@
 {
     public class TodoSequencer
     {
+        // Fields
         private static int todoId;
 
+        // Properties
         public static int TodoId
         {
             get
@@ -16,6 +18,7 @@
             }
         }
 
+        // Methods
         public static int NextTodoId()
         {
             return ++TodoId;
