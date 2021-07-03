@@ -23,7 +23,6 @@
         {
             return ++TodoId;
         }
-
         public static int Reset()
         {
             return TodoId = 0;
