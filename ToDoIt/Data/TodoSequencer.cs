@@ -19,11 +19,11 @@
         }
 
         // Methods
-        public static int NextTodoId()
+        public static int nextTodoId()
         {
             return ++TodoId;
         }
-        public static int Reset()
+        public static int reset()
         {
             return TodoId = 0;
         }
