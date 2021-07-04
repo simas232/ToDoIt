@@ -88,5 +88,24 @@ namespace ToDoIt.Tests.Data
             // Assert
             Assert.Equal(testPeople.ArrPerson, testPersons);
         }
+
+        [Fact]
+        public void CheckClear()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            int expSize = 0;
+            int actualSize;
+
+            // Act
+            People testPeople = new People();
+            testPeople.AddPerson(firstName, lastName);
+            testPeople.Clear();
+            actualSize = testPeople.Size();
+
+            // Assert
+            Assert.Equal(expSize, actualSize);
+        }
     }
 }
