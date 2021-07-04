@@ -24,12 +24,12 @@ namespace ToDoIt.Data
         }
 
         // Methods
-        public static int Size()
+        public int Size()
         {
             return TodoArray.Length;
         }
 
-        public static Todo[] FindAll()
+        public Todo[] FindAll()
         {
             return TodoArray;
         }
