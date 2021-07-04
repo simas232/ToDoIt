@@ -107,5 +107,28 @@ namespace ToDoIt.Tests.Data
             // Assert
             Assert.Equal(expSize, actualSize);
         }
+
+        [Fact]
+        public void CheckFindById()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            Person trustedPerson1 = testPeople.AddPerson(firstName, lastName);
+            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person actualPerson1 = testPeople.FindById(1);
+            Person actualPerson2 = testPeople.FindById(2);
+
+            // Assert
+            Assert.Equal(trustedPerson1, actualPerson1);
+            Assert.Equal(trustedPerson2, actualPerson2);
+        }
     }
 }
