@@ -22,15 +22,15 @@ namespace ToDoIt.Data
 
         public int Size()
         {
-            return ArrPerson.Length;
+            return arrPerson.Length;
         }
         public Person[] FindAll()
         {
-            return ArrPerson;
+            return arrPerson;
         }
         public Person FindById(int personId)
         {
-            foreach (Person item in ArrPerson)
+            foreach (Person item in arrPerson)
             {
                 if (item.PersonId == personId)
                 {
@@ -43,16 +43,15 @@ namespace ToDoIt.Data
         {   //Creating the new person as object        
             Person addNewPerson = new Person(firstName, lastName, PersonSequencer.NextPersonId());
 
-            Array.Resize(ref arrPerson, Size() + 1);
+            Array.Resize(ref arrPerson, arrPerson.Length + 1);
 
-            arrPerson[Size() - 1] = addNewPerson;
+            arrPerson[arrPerson.Length - 1] = addNewPerson;
 
             return addNewPerson;
         }
         public void Clear()
         {
-            Person[] ArrPerson = new Person[0];
-            // Array.Clear(ArrPerson, 0, ArrPerson.Length);
+            arrPerson = new Person[0];
         }
     }
 }
