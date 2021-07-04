@@ -28,7 +28,6 @@ namespace ToDoIt.Data
         {
             return TodoArray.Length;
         }
-
         public Todo[] FindAll()
         {
             return TodoArray;
