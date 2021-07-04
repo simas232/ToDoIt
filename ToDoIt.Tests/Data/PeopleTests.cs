@@ -10,21 +10,42 @@ namespace ToDoIt.Tests.Data
     public class PeopleTests
     {
         [Fact]
-        public void CheckAddPersonTest()
+        public void CheckAddPerson()
         {
             // Arrange
             string firstName = "Simons";
             string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+
+            int expFirstPersonId = 1;
+            int expSecondPersonId = 2;
+            int expSize = 2;
 
             // Act
+            PersonSequencer.Reset();
             People testPeople = new People();
-            Person testPerson = testPeople.AddPerson(firstName, lastName);
+            testPeople.ArrPerson = new Person[0];// same like Clear function, which we do have tested yet
+            Person person1 = testPeople.AddPerson(firstName, lastName);
+            Person person2 = testPeople.AddPerson(firstName2, lastName2);
+            Person[] testPersons = testPeople.ArrPerson;
 
-            // Assert        
-            Assert.Equal(firstName, testPerson.FirstName);
-            Assert.Equal(lastName, testPerson.LastName);
-            Assert.Equal(1, testPerson.PersonId);
+            // Assert
+            Assert.Equal(firstName, person1.FirstName);
+            Assert.Equal(lastName, person1.LastName);
+            Assert.Equal(expFirstPersonId, person1.PersonId);
+            Assert.Equal(firstName2, person2.FirstName);
+            Assert.Equal(lastName2, person2.LastName);
+            Assert.Equal(expSecondPersonId, person2.PersonId);
+
+            Assert.Equal(firstName, testPersons[0].FirstName);
+            Assert.Equal(lastName, testPersons[0].LastName);
+            Assert.Equal(expFirstPersonId, testPersons[0].PersonId);
+            Assert.Equal(firstName2, testPersons[1].FirstName);
+            Assert.Equal(lastName2, testPersons[1].LastName);
+            Assert.Equal(expSecondPersonId, testPersons[1].PersonId);
+
+            Assert.Equal(expSize, testPersons.Length);
         }
-
     }
 }
