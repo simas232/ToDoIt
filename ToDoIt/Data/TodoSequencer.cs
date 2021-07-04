@@ -6,7 +6,7 @@
         private static int todoId;
 
         // Properties
-        public static int TodoId
+        public int TodoId
         {
             get
             {
@@ -21,11 +21,11 @@
         // Methods
         public static int nextTodoId()
         {
-            return ++TodoId;
+            return ++todoId;
         }
         public static void reset()
         {
-            TodoId = 0;
+            todoId = 0;
         }
     }
 }
