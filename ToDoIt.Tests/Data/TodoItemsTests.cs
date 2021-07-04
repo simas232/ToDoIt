@@ -124,5 +124,22 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(secondDescription, actualSecondTodo.Description);
             Assert.Equal(thirdDescription, actualThirdTodo.Description);
         }
+        [Fact]
+        public void ClearWorks()
+        {
+            // Arrange
+            int expectedSize = 0;
+            int actualSize;
+            String description = "Buy coconut milk";
+
+            // Act
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.AddTodo(description);
+            actualTodoItems.Clear();
+            actualSize = actualTodoItems.Size();
+
+            // Assert
+            Assert.Equal(expectedSize, actualSize);
+        }
     }
 }
