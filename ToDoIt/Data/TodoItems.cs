@@ -32,5 +32,16 @@ namespace ToDoIt.Data
         {
             return TodoArray;
         }
+        public Todo FindById(int todoId)
+        {
+            foreach (Todo todoEntry in TodoArray)
+            {
+                if (todoEntry.TodoId == todoId)
+                {
+                    return todoEntry;
+                }
+            }
+            return null;
+        }
     }
 }
