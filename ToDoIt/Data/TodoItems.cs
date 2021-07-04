@@ -9,7 +9,7 @@ namespace ToDoIt.Data
         private static Todo[] todoArray = new Todo[0];
 
         // Properties
-        public static Todo[] TodoArray
+        public Todo[] TodoArray
         {
             get
             {
@@ -24,15 +24,15 @@ namespace ToDoIt.Data
         // Methods
         public int Size()
         {
-            return TodoArray.Length;
+            return todoArray.Length;
         }
         public Todo[] FindAll()
         {
-            return TodoArray;
+            return todoArray;
         }
         public Todo FindById(int todoId)
         {
-            foreach (Todo todoEntry in TodoArray)
+            foreach (Todo todoEntry in todoArray)
             {
                 if (todoEntry.TodoId == todoId)
                 {
