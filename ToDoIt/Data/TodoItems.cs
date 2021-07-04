@@ -43,9 +43,9 @@ namespace ToDoIt.Data
         }
         public Todo AddTodo(String description)
         {
-            Array.Resize(ref todoArray, Size() + 1);
-            todoArray[Size() - 1] = new Todo(TodoSequencer.nextTodoId(), description);
-            return todoArray[Size() - 1];
+            Array.Resize(ref todoArray, todoArray.Length + 1);
+            todoArray[todoArray.Length - 1] = new Todo(TodoSequencer.nextTodoId(), description);
+            return todoArray[todoArray.Length - 1];
         }
         public void Clear()
         {
