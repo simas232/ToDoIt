@@ -13,8 +13,14 @@ namespace ToDoIt.Data
         // Properties
         public static Todo[] TodoArray
         {
-            get { return todoArray; }
-            set { todoArray = value; }
+            get
+            {
+                return todoArray;
+            }
+            set
+            {
+                todoArray = value;
+            }
         }
 
         // Methods
