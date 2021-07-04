@@ -49,7 +49,7 @@ namespace ToDoIt.Data
 
             return addNewPerson;
         }
-        public static void Clear()
+        public void Clear()
         {
             Person[] ArrPerson = new Person[0];
             // Array.Clear(ArrPerson, 0, ArrPerson.Length);
