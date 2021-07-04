@@ -49,5 +49,9 @@ namespace ToDoIt.Data
             todoArray[Size() - 1] = new Todo(TodoSequencer.NextTodoId(), description);
             return todoArray[Size() - 1];
         }
+        public void Clear()
+        {
+            todoArray = new Todo[0];
+        }
     }
 }
