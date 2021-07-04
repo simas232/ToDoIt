@@ -2,21 +2,30 @@
 {
     public class TodoSequencer
     {
+        // Fields
         private static int todoId;
 
-        public static int TodoId {
-            get { return todoId; }
-            set { todoId = value; }
+        // Properties
+        public static int TodoId
+        {
+            get
+            {
+                return todoId;
+            }
+            set
+            {
+                todoId = value;
+            }
         }
 
-        public static int NextTodoId()
+        // Methods
+        public static int nextTodoId()
         {
             return ++TodoId;
         }
-
-        public static int Reset()
+        public static void reset()
         {
-            return TodoId = 0;
+            TodoId = 0;
         }
     }
 }
