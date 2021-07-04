@@ -43,5 +43,11 @@ namespace ToDoIt.Data
             }
             return null;
         }
+        public Todo AddTodo(String description)
+        {
+            Array.Resize(ref todoArray, Size() + 1);
+            todoArray[Size() - 1] = new Todo(TodoSequencer.NextTodoId(), description);
+            return todoArray[Size() - 1];
+        }
     }
 }
