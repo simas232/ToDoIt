@@ -100,5 +100,29 @@ namespace ToDoIt.Tests.Data
             // Since three todo tasks are in actualTodoItems, the length of testTodoItemsArray should also be the same
             Assert.Equal(expectedSize, testTodoItemsArray.Length);
         }
+        [Fact]
+        public void FindByIdWorks()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            String secondDescription = "Go to the gym";
+            String thirdDescription = "Install Visual Studio";
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            Todo actualFirstTodo = actualTodoItems.FindById(1);
+            Todo actualSecondTodo = actualTodoItems.FindById(2);
+            Todo actualThirdTodo = actualTodoItems.FindById(3);
+
+            // Assert
+            Assert.Equal(firstDescription, actualFirstTodo.Description);
+            Assert.Equal(secondDescription, actualSecondTodo.Description);
+            Assert.Equal(thirdDescription, actualThirdTodo.Description);
+        }
     }
 }
