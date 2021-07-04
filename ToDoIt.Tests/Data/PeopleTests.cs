@@ -47,5 +47,27 @@ namespace ToDoIt.Tests.Data
 
             Assert.Equal(expSize, testPersons.Length);
         }
+
+        [Fact]
+        public void CheckSize()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            int expSizeNoPersons = 0;
+            int expSizeOnePerson = 1;
+            int actualSizeNoPersons;
+            int actualSizeOnePerson;
+
+            // Act
+            People testPeople = new People();
+            actualSizeNoPersons = testPeople.Size();
+            testPeople.AddPerson(firstName, lastName);
+            actualSizeOnePerson = testPeople.Size();
+
+            // Assert
+            Assert.Equal(expSizeNoPersons, actualSizeNoPersons);
+            Assert.Equal(expSizeOnePerson, actualSizeOnePerson);
+        }
     }
 }
