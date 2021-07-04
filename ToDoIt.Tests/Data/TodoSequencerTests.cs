@@ -6,39 +6,43 @@ namespace ToDoIt.Tests.Data
     public class TodoSequencerTests
     {
         [Fact]
-        public void TodoSequencer_TestIdIncrement()
+        public void TodoIdIncrementWorks()
         {
             // Arrange
-            int firstIdRef = 1;
-            int secondIdRef = 2;
-            int thirdIdRef = 3;
+            int expectedFirstTodoId = 1;
+            int expectedSecondTodoId = 2;
+            int expectedThirdTodoId = 3;
+            int actualFirstTodoId;
+            int actualSecondTodoId;
+            int actualThirdTodoId;
 
             // Act
-            int firstTodoId = TodoSequencer.NextTodoId();
-            int secondTodoId = TodoSequencer.NextTodoId();
-            int thirdTodoId = TodoSequencer.NextTodoId();
+            TodoSequencer.reset();
+            actualFirstTodoId = TodoSequencer.nextTodoId();
+            actualSecondTodoId = TodoSequencer.nextTodoId();
+            actualThirdTodoId = TodoSequencer.nextTodoId();
 
-            // Assert        
-            Assert.Equal(firstTodoId, firstIdRef);
-            Assert.Equal(secondTodoId, secondIdRef);
-            Assert.Equal(thirdTodoId, thirdIdRef);
+            // Assert
+            Assert.Equal(expectedFirstTodoId, actualFirstTodoId);
+            Assert.Equal(expectedSecondTodoId, actualSecondTodoId);
+            Assert.Equal(expectedThirdTodoId, actualThirdTodoId);
         }
 
         [Fact]
-        public void TodoSequencer_TestIdReset()
+        public void TodoIdResetWorks()
         {
             // Arrange
-            int todoIdRef = 1;
-            int todoId;
+            int expectedTodoId = 1;
+            int actualTodoId;
 
             // Act
-            TodoSequencer.NextTodoId();
-            TodoSequencer.NextTodoId();
-            TodoSequencer.Reset();
-            todoId = TodoSequencer.NextTodoId();
+            TodoSequencer.nextTodoId();
+            TodoSequencer.nextTodoId();
+            TodoSequencer.reset();
+            actualTodoId = TodoSequencer.nextTodoId();
 
-            // Assert        
-            Assert.Equal(todoId, todoIdRef);
+            // Assert
+            Assert.Equal(expectedTodoId, actualTodoId);
         }
     }
 }
