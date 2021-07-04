@@ -23,9 +23,9 @@
         {
             return ++TodoId;
         }
-        public static int reset()
+        public static void reset()
         {
-            return TodoId = 0;
+            TodoId = 0;
         }
     }
 }
