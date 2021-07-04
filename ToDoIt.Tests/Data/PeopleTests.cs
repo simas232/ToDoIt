@@ -69,5 +69,24 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expSizeNoPersons, actualSizeNoPersons);
             Assert.Equal(expSizeOnePerson, actualSizeOnePerson);
         }
+
+        [Fact]
+        public void CheckFindAll()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+
+            // Act
+            People testPeople = new People();
+            testPeople.AddPerson(firstName, lastName);
+            testPeople.AddPerson(firstName2, lastName2);
+            Person[] testPersons = testPeople.FindAll();
+
+            // Assert
+            Assert.Equal(testPeople.ArrPerson, testPersons);
+        }
     }
 }
