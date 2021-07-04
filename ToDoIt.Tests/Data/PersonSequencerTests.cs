@@ -2,7 +2,7 @@
 using ToDoIt.Models;
 using ToDoIt.Data;
 
-namespace ToDoIt.Tests.Models
+namespace ToDoIt.Tests.Data
 {
     public class PersonSequencerTests
     {
