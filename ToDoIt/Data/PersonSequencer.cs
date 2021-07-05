@@ -10,8 +10,14 @@ namespace ToDoIt.Data
 
         public static int PersonId
         {
-            get { return personId; }
-            private set { personId = NextPersonId(); }
+            get
+            {
+                return personId;
+            }
+            set
+            {
+                personId = value;
+            }
         }
         public static int NextPersonId()
         {

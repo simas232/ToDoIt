@@ -32,6 +32,7 @@ namespace ToDoIt.Data
         }
         public Todo FindById(int todoId)
         {
+            // It is assumed that only one person with personId exists. If there are multiple, then only first hit is returned
             foreach (Todo todoEntry in todoArray)
             {
                 if (todoEntry.TodoId == todoId)
@@ -108,6 +109,7 @@ namespace ToDoIt.Data
         }
         public void RemoveTodo(Todo todoEntryToRemove)
         {
+            //This function firstly identifies the index of person to be deleted and the reformats the array by skipping that index
             int indexToRemove = 0;
 
             foreach (Todo todoEntry in todoArray)

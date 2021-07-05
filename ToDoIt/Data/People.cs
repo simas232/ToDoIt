@@ -30,6 +30,7 @@ namespace ToDoIt.Data
         }
         public Person FindById(int personId)
         {
+            // It is assumed that only one person with personId exists. If there are multiple, then only first hit is returned
             foreach (Person item in arrPerson)
             {
                 if (item.PersonId == personId)
@@ -42,11 +43,11 @@ namespace ToDoIt.Data
         public Person AddPerson(string firstName, string lastName)
         {   //Creating the new person as object        
             Person addNewPerson = new Person(firstName, lastName, PersonSequencer.NextPersonId());
-
+            
             Array.Resize(ref arrPerson, arrPerson.Length + 1);
-
+            
             arrPerson[arrPerson.Length - 1] = addNewPerson;
-
+            
             return addNewPerson;
         }
         public void Clear()
@@ -55,6 +56,7 @@ namespace ToDoIt.Data
         }
         public void RemovePerson(Person personEntryToRemove)
         {
+            //This function firstly identifies the index of person to be deleted and the reformats the array by skipping that index
             int indexToRemove = 0;
 
             foreach (Person item in arrPerson)
