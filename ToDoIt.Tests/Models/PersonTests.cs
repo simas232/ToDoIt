@@ -6,7 +6,7 @@ namespace ToDoIt.Tests.Models
     public class PersonTests
     {
         [Fact]
-        public void PersonDetails()
+        public void CheckPersonDetails()
         {
             // Arrange
             string firstName = "Shayan";
