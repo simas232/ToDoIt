@@ -106,5 +106,28 @@ namespace ToDoIt.Data
             }
             return filteredTodoArray;
         }
+        public void RemoveTodo(Todo todoEntryToRemove)
+        {
+            int indexToRemove = 0;
+
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry == todoEntryToRemove)
+                {
+                    break;
+                }
+                indexToRemove++;
+            }
+            if ((indexToRemove == todoArray.Length) || (todoArray.Length == 0)) 
+            {
+                return;
+            }
+
+            for (int index = 0; index < todoArray.Length - 1; index++)
+            {
+                todoArray[index] = index < indexToRemove ? todoArray[index] : todoArray[index + 1];
+            }
+            Array.Resize(ref todoArray, todoArray.Length - 1);
+        }
     }
 }
