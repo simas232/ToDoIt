@@ -51,5 +51,60 @@ namespace ToDoIt.Data
         {
             todoArray = new Todo[0];
         }
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Done == doneStatus)
+                {
+                    Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                    filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                }
+            }
+            return filteredTodoArray;
+        }
+        public Todo[] FindByAssignee(int personId)
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Assignee != null)
+                {
+                    if (todoEntry.Assignee.PersonId == personId)
+                    {
+                        Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                        filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                    }
+                }
+            }
+            return filteredTodoArray;
+        }
+        public Todo[] FindByAssignee(Person assignee)
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Assignee == assignee)
+                {
+                    Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                    filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                }
+            }
+            return filteredTodoArray;
+        }
+        public Todo[] FindUnassignedTodoItems()
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Assignee == null)
+                {
+                    Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                    filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                }
+            }
+            return filteredTodoArray;
+        }
     }
 }
