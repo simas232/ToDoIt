@@ -151,7 +151,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedThirdTodo, actualThirdTodo);
         }
         [Fact]
-        public void FindByDoneStatusWorks_Mixed()
+        public void FindByDoneStatus_MixedWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -200,7 +200,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualTodoItems.TodoArray[2], actualPendingTodos[1]);
         }
         [Fact]
-        public void FindByDoneStatusWorks_AllDone()
+        public void FindByDoneStatus_AllDoneWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -242,7 +242,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedPendingTasksArrayLength, actualPendingTodos.Length);
         }
         [Fact]
-        public void FindByAssignee_FromPersonId()
+        public void FindByAssignee_FromPersonIdWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -289,7 +289,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expIncognitosTasksArrayLength, incognitoTodoItems.Length);
         }
         [Fact]
-        public void FindByAssignee_FromPersonObj()
+        public void FindByAssignee_FromPersonObjWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -374,7 +374,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualTodoItems.TodoArray[3], actualUnassignedTodoItems[1]);
         }
         [Fact]
-        public void RemoveTodoWorks_FirstEntry()
+        public void RemoveTodo_FirstEntryWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -407,7 +407,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualFifthTodoTask, actualTodoItems.TodoArray[3]);
         }
         [Fact]
-        public void RemoveTodoWorks_MiddleEntry()
+        public void RemoveTodo_MiddleEntryWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -440,7 +440,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualFifthTodoTask, actualTodoItems.TodoArray[3]);
         }
         [Fact]
-        public void RemoveTodoWorks_LastEntry()
+        public void RemoveTodo_LastEntryWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -473,7 +473,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[3]);
         }
         [Fact]
-        public void RemoveTodoWorks_ThreeEntries()
+        public void RemoveTodo_ThreeEntriesWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -508,7 +508,7 @@ namespace ToDoIt.Tests.Data
 
         }
         [Fact]
-        public void RemoveTodoWorks_AllEntries()
+        public void RemoveTodo_AllEntriesWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -542,7 +542,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
         }
         [Fact]
-        public void RemoveTodoWorks_NoEntriesFound()
+        public void RemoveTodo_NoEntriesFoundWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
