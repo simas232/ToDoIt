@@ -150,5 +150,96 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedSecondTodo, actualSecondTodo);
             Assert.Equal(expectedThirdTodo, actualThirdTodo);
         }
+        [Fact]
+        public void FindByDoneStatusWorks_Mixed()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            bool firstDoneStatus = true;
+            String secondDescription = "Go to the gym";
+            bool secondDoneStatus = false;
+            String thirdDescription = "Install Visual Studio";
+            bool thirdDoneStatus = false;
+            String fourthDescription = "Eat a small cup of almonds";
+            bool fourthDoneStatus = true;
+            String fifthDescription = "Go to the park";
+            bool fifthDoneStatus = true;
+            int expectedDoneTasksArrayLength = 3;
+            int expectedPendingTasksArrayLength = 2;
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+
+            // Create five todo tasks using different descriptions
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            actualTodoItems.AddTodo(fourthDescription);
+            actualTodoItems.AddTodo(fifthDescription);
+
+            // Set Done values for these five newly added tasks
+            actualTodoItems.TodoArray[0].Done = firstDoneStatus;
+            actualTodoItems.TodoArray[1].Done = secondDoneStatus;
+            actualTodoItems.TodoArray[2].Done = thirdDoneStatus;
+            actualTodoItems.TodoArray[3].Done = fourthDoneStatus;
+            actualTodoItems.TodoArray[4].Done = fifthDoneStatus;
+
+            Todo[] actualCompletedTodos = actualTodoItems.FindByDoneStatus(true);
+            Todo[] actualPendingTodos = actualTodoItems.FindByDoneStatus(false);
+
+            // Assert
+            Assert.Equal(expectedDoneTasksArrayLength, actualCompletedTodos.Length);
+            Assert.Equal(actualTodoItems.TodoArray[0], actualCompletedTodos[0]);
+            Assert.Equal(actualTodoItems.TodoArray[3], actualCompletedTodos[1]);
+            Assert.Equal(actualTodoItems.TodoArray[4], actualCompletedTodos[2]);
+
+            Assert.Equal(expectedPendingTasksArrayLength, actualPendingTodos.Length);
+            Assert.Equal(actualTodoItems.TodoArray[1], actualPendingTodos[0]);
+            Assert.Equal(actualTodoItems.TodoArray[2], actualPendingTodos[1]);
+        }
+        [Fact]
+        public void FindByDoneStatusWorks_AllDone()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            bool firstDoneStatus = true;
+            String secondDescription = "Go to the gym";
+            bool secondDoneStatus = true;
+            String thirdDescription = "Install Visual Studio";
+            bool thirdDoneStatus = true;
+            String fourthDescription = "Eat a small cup of almonds";
+            bool fourthDoneStatus = true;
+            String fifthDescription = "Go to the park";
+            bool fifthDoneStatus = true;
+            int expectedPendingTasksArrayLength = 0;
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+
+            // Create five todo tasks using different descriptions
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            actualTodoItems.AddTodo(fourthDescription);
+            actualTodoItems.AddTodo(fifthDescription);
+
+            // Set Done values for these five newly added tasks
+            actualTodoItems.TodoArray[0].Done = firstDoneStatus;
+            actualTodoItems.TodoArray[1].Done = secondDoneStatus;
+            actualTodoItems.TodoArray[2].Done = thirdDoneStatus;
+            actualTodoItems.TodoArray[3].Done = fourthDoneStatus;
+            actualTodoItems.TodoArray[4].Done = fifthDoneStatus;
+
+            Todo[] actualCompletedTodos = actualTodoItems.FindByDoneStatus(true);
+            Todo[] actualPendingTodos = actualTodoItems.FindByDoneStatus(false);
+
+            // Assert
+            Assert.Equal(actualTodoItems.TodoArray, actualCompletedTodos);
+            Assert.Equal(expectedPendingTasksArrayLength, actualPendingTodos.Length);
+        }
     }
 }
