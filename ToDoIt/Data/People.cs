@@ -53,5 +53,28 @@ namespace ToDoIt.Data
         {
             arrPerson = new Person[0];
         }
+        public void RemovePerson(Person todoEntryToRemove)
+        {
+            int indexToRemove = 0;
+
+            foreach (Person item in arrPerson)
+            {
+                if (item == todoEntryToRemove)
+                {
+                    break;
+                }
+                indexToRemove++;
+            }
+            if ((indexToRemove == arrPerson.Length) || (arrPerson.Length == 0))
+            {
+                return;
+            }
+
+            for (int index = 0; index < arrPerson.Length - 1; index++)
+            {
+                arrPerson[index] = index < indexToRemove ? arrPerson[index] : arrPerson[index + 1];
+            }
+            Array.Resize(ref arrPerson, arrPerson.Length - 1);
+        }
     }
 }
