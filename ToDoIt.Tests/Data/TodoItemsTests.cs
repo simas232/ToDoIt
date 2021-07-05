@@ -241,5 +241,52 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualTodoItems.TodoArray, actualCompletedTodos);
             Assert.Equal(expectedPendingTasksArrayLength, actualPendingTodos.Length);
         }
+        [Fact]
+        public void FindByAssignee_Mixed()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            Person firstAssignee = new Person("Shayan", "Alivand", 1);
+            String secondDescription = "Go to the gym";
+            String thirdDescription = "Install Visual Studio";
+            Person thirdAssignee = new Person("Shayan", "Alivand", 1);
+            String fourthDescription = "Eat a small cup of almonds";
+            String fifthDescription = "Go to the park";
+            Person fifthAssignee = new Person("Bart", "Simpson", 2);
+            int expShayansTasksArrayLength = 2;
+            int expBartsTasksArrayLength = 1;
+            int expIncognitosTasksArrayLength = 0;
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+
+            // Create five todo tasks using different descriptions
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            actualTodoItems.AddTodo(fourthDescription);
+            actualTodoItems.AddTodo(fifthDescription);
+
+            // Set assignee values for these five newly added tasks
+            actualTodoItems.TodoArray[0].Assignee = firstAssignee;
+            actualTodoItems.TodoArray[2].Assignee = thirdAssignee;
+            actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
+
+            Todo[] shayansTodoItems = actualTodoItems.FindByAssignee(1);
+            Todo[] bartsTodoItems = actualTodoItems.FindByAssignee(2);
+            Todo[] incognitoTodoItems = actualTodoItems.FindByAssignee(9);
+
+            // Assert
+            Assert.Equal(expShayansTasksArrayLength, shayansTodoItems.Length);
+            Assert.Equal(actualTodoItems.TodoArray[0], shayansTodoItems[0]);
+            Assert.Equal(actualTodoItems.TodoArray[2], shayansTodoItems[1]);
+
+            Assert.Equal(expBartsTasksArrayLength, bartsTodoItems.Length);
+            Assert.Equal(actualTodoItems.TodoArray[4], bartsTodoItems[0]);
+
+            Assert.Equal(expIncognitosTasksArrayLength, incognitoTodoItems.Length);
+        }
     }
 }
