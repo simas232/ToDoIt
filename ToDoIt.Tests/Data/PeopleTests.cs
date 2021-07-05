@@ -78,11 +78,20 @@ namespace ToDoIt.Tests.Data
             string lastName = "Gothenburg";
             string firstName2 = "Anna";
             string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
 
             // Act
             People testPeople = new People();
             testPeople.AddPerson(firstName, lastName);
             testPeople.AddPerson(firstName2, lastName2);
+            testPeople.AddPerson(firstName3, lastName3);
+            testPeople.AddPerson(firstName4, lastName4);
+            testPeople.AddPerson(firstName5, lastName5);
             Person[] testPersons = testPeople.FindAll();
 
             // Assert
@@ -116,6 +125,12 @@ namespace ToDoIt.Tests.Data
             string lastName = "Gothenburg";
             string firstName2 = "Anna";
             string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
 
             // Act
             PersonSequencer.Reset();
@@ -123,12 +138,176 @@ namespace ToDoIt.Tests.Data
             testPeople.Clear();
             Person trustedPerson1 = testPeople.AddPerson(firstName, lastName);
             Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
+            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
+            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+
             Person actualPerson1 = testPeople.FindById(1);
             Person actualPerson2 = testPeople.FindById(2);
+            Person actualPerson3 = testPeople.FindById(3);
+            Person actualPerson4 = testPeople.FindById(4);
+            Person actualPerson5 = testPeople.FindById(5);
 
             // Assert
             Assert.Equal(trustedPerson1, actualPerson1);
             Assert.Equal(trustedPerson2, actualPerson2);
+            Assert.Equal(trustedPerson3, actualPerson3);
+            Assert.Equal(trustedPerson4, actualPerson4);
+            Assert.Equal(trustedPerson5, actualPerson5);
+        }
+
+        [Fact]
+        public void CheckRemovePerson_OneHit()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
+            int expArrPersonSize = 4;
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
+            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
+            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
+            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+
+            testPeople.RemovePerson(trustedPerson);
+
+            // Assert
+            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(trustedPerson2, testPeople.ArrPerson[0]);
+            Assert.Equal(trustedPerson3, testPeople.ArrPerson[1]);
+            Assert.Equal(trustedPerson4, testPeople.ArrPerson[2]);
+            Assert.Equal(trustedPerson5, testPeople.ArrPerson[3]);
+        }
+
+        [Fact]
+        public void CheckRemovePerson_ThreeHits()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
+            int expArrPersonSize = 2;
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
+            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
+            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
+            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+
+            testPeople.RemovePerson(trustedPerson);
+            testPeople.RemovePerson(trustedPerson3);
+            testPeople.RemovePerson(trustedPerson5);
+
+            // Assert
+            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(trustedPerson2, testPeople.ArrPerson[0]);
+            Assert.Equal(trustedPerson4, testPeople.ArrPerson[1]);
+        }
+
+        [Fact]
+        public void CheckRemovePerson_AllHits()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
+            int expArrPersonSize = 0;
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
+            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
+            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
+            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+
+            testPeople.RemovePerson(trustedPerson);
+            testPeople.RemovePerson(trustedPerson2);
+            testPeople.RemovePerson(trustedPerson3);
+            testPeople.RemovePerson(trustedPerson4);
+            testPeople.RemovePerson(trustedPerson5);
+
+            // Assert
+            Assert.Equal(expArrPersonSize, testPeople.Size());
+        }
+
+        [Fact]
+        public void CheckRemovePerson_NoHits()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
+
+            string firstName323 = "Donald";
+            string lastName323 = "Duck";
+
+            int expArrPersonSize = 5;
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
+            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
+            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
+            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
+            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            Person donaldDuck = new Person(firstName323, lastName323, 323);
+
+            testPeople.RemovePerson(donaldDuck);
+
+            // Assert
+            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(trustedPerson, testPeople.ArrPerson[0]);
+            Assert.Equal(trustedPerson2, testPeople.ArrPerson[1]);
+            Assert.Equal(trustedPerson3, testPeople.ArrPerson[2]);
+            Assert.Equal(trustedPerson4, testPeople.ArrPerson[3]);
+            Assert.Equal(trustedPerson5, testPeople.ArrPerson[4]);
         }
     }
 }
