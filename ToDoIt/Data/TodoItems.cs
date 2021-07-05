@@ -51,5 +51,18 @@ namespace ToDoIt.Data
         {
             todoArray = new Todo[0];
         }
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Done == doneStatus)
+                {
+                    Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                    filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                }
+            }
+            return filteredTodoArray;
+        }
     }
 }
