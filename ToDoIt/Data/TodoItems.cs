@@ -93,5 +93,18 @@ namespace ToDoIt.Data
             }
             return filteredTodoArray;
         }
+        public Todo[] FindUnassignedTodoItems()
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Assignee == null)
+                {
+                    Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                    filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                }
+            }
+            return filteredTodoArray;
+        }
     }
 }
