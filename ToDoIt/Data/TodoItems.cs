@@ -64,5 +64,21 @@ namespace ToDoIt.Data
             }
             return filteredTodoArray;
         }
+        public Todo[] FindByAssignee(int personId)
+        {
+            Todo[] filteredTodoArray = new Todo[0];
+            foreach (Todo todoEntry in todoArray)
+            {
+                if (todoEntry.Assignee != null)
+                {
+                    if (todoEntry.Assignee.PersonId == personId)
+                    {
+                        Array.Resize(ref filteredTodoArray, filteredTodoArray.Length + 1);
+                        filteredTodoArray[filteredTodoArray.Length - 1] = todoEntry;
+                    }
+                }
+            }
+            return filteredTodoArray;
+        }
     }
 }
