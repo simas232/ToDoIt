@@ -242,7 +242,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedPendingTasksArrayLength, actualPendingTodos.Length);
         }
         [Fact]
-        public void FindByAssignee_Mixed()
+        public void FindByAssignee_FromPersonId()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -287,6 +287,53 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(actualTodoItems.TodoArray[4], bartsTodoItems[0]);
 
             Assert.Equal(expIncognitosTasksArrayLength, incognitoTodoItems.Length);
+        }
+        [Fact]
+        public void FindByAssignee_FromPersonObj()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            Person firstAssignee = new Person("Shayan", "Alivand", 1);
+            String secondDescription = "Go to the gym";
+            String thirdDescription = "Install Visual Studio";
+            String fourthDescription = "Eat a small cup of almonds";
+            String fifthDescription = "Go to the park";
+            Person fifthAssignee = new Person("Bart", "Simpson", 2);
+            Person incognitoAssignee = new Person("Eric", "Eric", 9);
+            int expectedShayansTasksArrayLength = 2;
+            int expectedBartsTasksArrayLength = 1;
+            int expectedIncognitosTasksArrayLength = 0;
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+
+            // Create five todo tasks using different descriptions
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            actualTodoItems.AddTodo(fourthDescription);
+            actualTodoItems.AddTodo(fifthDescription);
+
+            // Set assignee values for these five newly added tasks
+            actualTodoItems.TodoArray[0].Assignee = firstAssignee;
+            actualTodoItems.TodoArray[2].Assignee = firstAssignee;
+            actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
+
+            Todo[] shayansTodoItems = actualTodoItems.FindByAssignee(firstAssignee);
+            Todo[] bartsTodoItems = actualTodoItems.FindByAssignee(fifthAssignee);
+            Todo[] incognitoTodoItems = actualTodoItems.FindByAssignee(incognitoAssignee);
+
+            // Assert
+            Assert.Equal(expectedShayansTasksArrayLength, shayansTodoItems.Length);
+            Assert.Equal(actualTodoItems.TodoArray[0], shayansTodoItems[0]);
+            Assert.Equal(actualTodoItems.TodoArray[2], shayansTodoItems[1]);
+
+            Assert.Equal(expectedBartsTasksArrayLength, bartsTodoItems.Length);
+            Assert.Equal(actualTodoItems.TodoArray[4], bartsTodoItems[0]);
+
+            Assert.Equal(expectedIncognitosTasksArrayLength, incognitoTodoItems.Length);
         }
     }
 }
