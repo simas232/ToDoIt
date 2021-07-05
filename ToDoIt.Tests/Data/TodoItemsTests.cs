@@ -335,5 +335,43 @@ namespace ToDoIt.Tests.Data
 
             Assert.Equal(expectedIncognitosTasksArrayLength, incognitoTodoItems.Length);
         }
+        [Fact]
+        public void FindUnassignedTodoItemsWorks()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            Person firstAssignee = new Person("Shayan", "Alivand", 1);
+            String secondDescription = "Go to the gym";
+            String thirdDescription = "Install Visual Studio";
+            Person thirdAssignee = new Person("Shayan", "Alivand", 1);
+            String fourthDescription = "Eat a small cup of almonds";
+            String fifthDescription = "Go to the park";
+            Person fifthAssignee = new Person("Bart", "Simpson", 2);
+            int expUnassignedTasksArrayLength = 2;
+
+            // Act
+            TodoSequencer.reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+
+            // Create five todo tasks using different descriptions
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            actualTodoItems.AddTodo(fourthDescription);
+            actualTodoItems.AddTodo(fifthDescription);
+
+            // Set assignee values for these five newly added tasks
+            actualTodoItems.TodoArray[0].Assignee = firstAssignee;
+            actualTodoItems.TodoArray[2].Assignee = thirdAssignee;
+            actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
+
+            Todo[] actualUnassignedTodoItems = actualTodoItems.FindUnassignedTodoItems();
+
+            // Assert
+            Assert.Equal(expUnassignedTasksArrayLength, actualUnassignedTodoItems.Length);
+            Assert.Equal(actualTodoItems.TodoArray[1], actualUnassignedTodoItems[0]);
+            Assert.Equal(actualTodoItems.TodoArray[3], actualUnassignedTodoItems[1]);
+        }
     }
 }
