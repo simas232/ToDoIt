@@ -53,13 +53,13 @@ namespace ToDoIt.Data
         {
             arrPerson = new Person[0];
         }
-        public void RemovePerson(Person todoEntryToRemove)
+        public void RemovePerson(Person personEntryToRemove)
         {
             int indexToRemove = 0;
 
             foreach (Person item in arrPerson)
             {
-                if (item == todoEntryToRemove)
+                if (item == personEntryToRemove)
                 {
                     break;
                 }
