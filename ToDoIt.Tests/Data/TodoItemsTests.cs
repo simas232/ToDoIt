@@ -22,7 +22,7 @@ namespace ToDoIt.Tests.Data
             // Act
             TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
+            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because it is not tested yet
             Todo actualFirstTodo = actualTodoItems.AddTodo(firstDescription);
             Todo actualSecondTodo = actualTodoItems.AddTodo(secondDescription);
             Todo actualThirdTodo = actualTodoItems.AddTodo(thirdDescription);
@@ -55,7 +55,7 @@ namespace ToDoIt.Tests.Data
             // Act
             TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
+            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because it is not tested yet
             actualSize = actualTodoItems.Size();
 
             // Assert
@@ -77,7 +77,7 @@ namespace ToDoIt.Tests.Data
 
             // Act
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
+            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because it is not tested yet
             actualTodoItems.AddTodo(firstDescription);
             actualSizeOneTodo = actualTodoItems.Size();
             actualTodoItems.AddTodo(secondDescription);
@@ -127,7 +127,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedSize, actualSize);
         }
         [Fact]
-        public void FindByIdWorks()
+        public void FindById_SingleHitWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -149,6 +149,27 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedFirstTodo, actualFirstTodo);
             Assert.Equal(expectedSecondTodo, actualSecondTodo);
             Assert.Equal(expectedThirdTodo, actualThirdTodo);
+        }
+        [Fact]
+        public void FindById_NoHitsWorks()
+        {
+            // Arrange
+            String firstDescription = "Buy coconut milk";
+            String secondDescription = "Go to the gym";
+            String thirdDescription = "Install Visual Studio";
+            Todo expectedResult = null;
+
+            // Act
+            TodoSequencer.Reset();
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.Clear();
+            actualTodoItems.AddTodo(firstDescription);
+            actualTodoItems.AddTodo(secondDescription);
+            actualTodoItems.AddTodo(thirdDescription);
+            Todo actualFirstTodo = actualTodoItems.FindById(9);
+
+            // Assert
+            Assert.Equal(expectedResult, actualFirstTodo);
         }
         [Fact]
         public void FindByDoneStatus_MixedWorks()
