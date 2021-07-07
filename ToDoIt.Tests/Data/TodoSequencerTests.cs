@@ -17,10 +17,10 @@ namespace ToDoIt.Tests.Data
             int actualThirdTodoId;
 
             // Act
-            TodoSequencer.reset();
-            actualFirstTodoId = TodoSequencer.nextTodoId();
-            actualSecondTodoId = TodoSequencer.nextTodoId();
-            actualThirdTodoId = TodoSequencer.nextTodoId();
+            TodoSequencer.Reset();
+            actualFirstTodoId = TodoSequencer.NextTodoId();
+            actualSecondTodoId = TodoSequencer.NextTodoId();
+            actualThirdTodoId = TodoSequencer.NextTodoId();
 
             // Assert
             Assert.Equal(expectedFirstTodoId, actualFirstTodoId);
@@ -36,10 +36,10 @@ namespace ToDoIt.Tests.Data
             int actualTodoId;
 
             // Act
-            TodoSequencer.nextTodoId();
-            TodoSequencer.nextTodoId();
-            TodoSequencer.reset();
-            actualTodoId = TodoSequencer.nextTodoId();
+            TodoSequencer.NextTodoId();
+            TodoSequencer.NextTodoId();
+            TodoSequencer.Reset();
+            actualTodoId = TodoSequencer.NextTodoId();
 
             // Assert
             Assert.Equal(expectedTodoId, actualTodoId);

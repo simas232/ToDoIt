@@ -20,7 +20,7 @@ namespace ToDoIt.Tests.Data
             int expectedSize = 3;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
             Todo actualFirstTodo = actualTodoItems.AddTodo(firstDescription);
@@ -53,7 +53,7 @@ namespace ToDoIt.Tests.Data
             int actualSize;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
             actualSize = actualTodoItems.Size();
@@ -135,7 +135,7 @@ namespace ToDoIt.Tests.Data
             String thirdDescription = "Install Visual Studio";
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
             Todo expectedFirstTodo = actualTodoItems.AddTodo(firstDescription);
@@ -168,7 +168,7 @@ namespace ToDoIt.Tests.Data
             int expectedPendingTasksArrayLength = 2;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -216,7 +216,7 @@ namespace ToDoIt.Tests.Data
             int expectedPendingTasksArrayLength = 0;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -258,7 +258,7 @@ namespace ToDoIt.Tests.Data
             int expIncognitosTasksArrayLength = 0;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -305,7 +305,7 @@ namespace ToDoIt.Tests.Data
             int expectedIncognitosTasksArrayLength = 0;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -350,7 +350,7 @@ namespace ToDoIt.Tests.Data
             int expUnassignedTasksArrayLength = 2;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -386,7 +386,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 4;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -419,7 +419,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 4;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -452,7 +452,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 4;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -485,7 +485,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 2;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -520,7 +520,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 0;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
@@ -556,7 +556,7 @@ namespace ToDoIt.Tests.Data
             int expectedTasksArrayLength = 5;
 
             // Act
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
             TodoItems actualTodoItems = new TodoItems();
             actualTodoItems.Clear();
 
