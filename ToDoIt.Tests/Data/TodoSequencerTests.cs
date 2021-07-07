@@ -17,7 +17,7 @@ namespace ToDoIt.Tests.Data
             int actualThirdTodoId;
 
             // Act
-            TodoSequencer.Reset();
+            TodoSequencer.TodoId = 0;// Replicate Reset() function functionality because it is not tested yet
             actualFirstTodoId = TodoSequencer.NextTodoId();
             actualSecondTodoId = TodoSequencer.NextTodoId();
             actualThirdTodoId = TodoSequencer.NextTodoId();
