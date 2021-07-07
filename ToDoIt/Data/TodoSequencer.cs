@@ -6,7 +6,7 @@
         private static int todoId;
 
         // Properties
-        public int TodoId
+        public static int TodoId
         {
             get
             {
