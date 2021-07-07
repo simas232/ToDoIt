@@ -127,7 +127,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedSize, actualSize);
         }
         [Fact]
-        public void FindById_SingleHitWorks()
+        public void FindById_EntryFoundWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
@@ -151,7 +151,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedThirdTodo, actualThirdTodo);
         }
         [Fact]
-        public void FindById_NoHitsWorks()
+        public void FindById_NoEntriesFoundWorks()
         {
             // Arrange
             String firstDescription = "Buy coconut milk";
