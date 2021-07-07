@@ -6,6 +6,19 @@ namespace ToDoIt.Tests.Data
     public class TodoSequencerTests
     {
         [Fact]
+        public void TodoIdWorks()
+        {
+            // Arrange
+            int expectedTodoId = 5;
+            int actualTodoId;
+
+            // Act
+            TodoSequencer.TodoId = expectedTodoId;
+            actualTodoId = TodoSequencer.TodoId;
+            // Assert
+            Assert.Equal(expectedTodoId, actualTodoId);
+        }
+        [Fact]
         public void TodoIdIncrementWorks()
         {
             // Arrange
