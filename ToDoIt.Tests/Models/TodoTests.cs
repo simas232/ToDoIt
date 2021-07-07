@@ -10,87 +10,87 @@ namespace ToDoIt.Tests.Models
         public void TodoIdWorks()
         {
             // Arrange
-            int todoId = 1;
+            int expectedTodoId = 1;
             String description = "Buy coconut milk";
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
+            Todo actualTodo = new Todo(expectedTodoId, description);
 
             // Assert
-            Assert.Equal(todoId, testTodo.TodoId);
+            Assert.Equal(expectedTodoId, actualTodo.TodoId);
         }
         [Fact]
         public void DescriptionWorks()
         {
             // Arrange
             int todoId = 1;
-            String description = "Buy coconut milk";
+            String expectedDescription = "Buy coconut milk";
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
+            Todo actualTodo = new Todo(todoId, expectedDescription);
 
             // Assert
-            Assert.Equal(description, testTodo.Description);
+            Assert.Equal(expectedDescription, actualTodo.Description);
         }
         [Fact]
         public void DoneDefaultWorks()
         {
             // Arrange
-            int todoId = 1;
+            int expectedTodoId = 1;
             String description = "Buy almond milk";
-            bool done = false;
+            bool expectedDoneDefault = false;
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
+            Todo actualTodo = new Todo(expectedTodoId, description);
 
             // Assert
-            Assert.Equal(done, testTodo.Done);
+            Assert.Equal(expectedDoneDefault, actualTodo.Done);
         }
         [Fact]
         public void DoneWorks()
         {
             // Arrange
-            int todoId = 1;
+            int expectedTodoId = 1;
             String description = "Buy coconut milk";
-            bool done = true;
+            bool expectedDone = true;
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
-            testTodo.Done = done;
+            Todo actualTodo = new Todo(expectedTodoId, description);
+            actualTodo.Done = expectedDone;
 
             // Assert
-            Assert.Equal(done, testTodo.Done);
+            Assert.Equal(expectedDone, actualTodo.Done);
         }
         [Fact]
         public void AssigneeDefaultWorks()
         {
             // Arrange
-            int todoId = 1;
+            int expectedTodoId = 1;
             String description = "Buy almond milk";
-            Person assignee = null;
+            Person expectedAssigneeDefault = null;
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
+            Todo actualTodo = new Todo(expectedTodoId, description);
 
             // Assert
-            Assert.Equal(assignee, testTodo.Assignee);
+            Assert.Equal(expectedAssigneeDefault, actualTodo.Assignee);
         }
         [Fact]
         public void AssigneeWorks()
         {
             // Arrange
-            int todoId = 1;
+            int expectedTodoId = 1;
             String description = "Buy coconut milk";
             string firstName = "Jane";
             string lastName = "Doe";
-            Person testAssignee = new Person(firstName, lastName, todoId);
+            Person actualAssignee = new Person(firstName, lastName, 1);
 
             // Act
-            Todo testTodo = new Todo(todoId, description);
-            testTodo.Assignee = testAssignee;
+            Todo actualTodo = new Todo(expectedTodoId, description);
+            actualTodo.Assignee = actualAssignee;
 
             // Assert
-            Assert.Equal(testAssignee, testTodo.Assignee);
+            Assert.Equal(actualAssignee, actualTodo.Assignee);
         }
     }
 }
