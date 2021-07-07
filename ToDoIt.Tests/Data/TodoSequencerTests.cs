@@ -10,13 +10,12 @@ namespace ToDoIt.Tests.Data
         {
             // Arrange
             int expectedTodoId = 5;
-            int actualTodoId;
 
             // Act
             TodoSequencer.TodoId = expectedTodoId;
-            actualTodoId = TodoSequencer.TodoId;
+
             // Assert
-            Assert.Equal(expectedTodoId, actualTodoId);
+            Assert.Equal(expectedTodoId, TodoSequencer.TodoId);
         }
         [Fact]
         public void TodoIdIncrementWorks()
@@ -45,15 +44,13 @@ namespace ToDoIt.Tests.Data
         {
             // Arrange
             int expectedTodoId = 0;
-            int actualTodoId;
 
             // Act
             TodoSequencer.TodoId = 5;
             TodoSequencer.Reset();
-            actualTodoId = TodoSequencer.TodoId;
 
             // Assert
-            Assert.Equal(expectedTodoId, actualTodoId);
+            Assert.Equal(expectedTodoId, TodoSequencer.TodoId);
         }
     }
 }
