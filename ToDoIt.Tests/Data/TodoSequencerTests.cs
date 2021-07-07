@@ -27,19 +27,17 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedSecondTodoId, actualSecondTodoId);
             Assert.Equal(expectedThirdTodoId, actualThirdTodoId);
         }
-
         [Fact]
         public void TodoIdResetWorks()
         {
             // Arrange
-            int expectedTodoId = 1;
+            int expectedTodoId = 0;
             int actualTodoId;
 
             // Act
-            TodoSequencer.NextTodoId();
-            TodoSequencer.NextTodoId();
+            TodoSequencer.TodoId = 5;
             TodoSequencer.Reset();
-            actualTodoId = TodoSequencer.NextTodoId();
+            actualTodoId = TodoSequencer.TodoId;
 
             // Assert
             Assert.Equal(expectedTodoId, actualTodoId);
