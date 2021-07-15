@@ -6,6 +6,18 @@ namespace ToDoIt.Tests.Data
     public class TodoSequencerTests
     {
         [Fact]
+        public void TodoIdWorks()
+        {
+            // Arrange
+            int expectedTodoId = 5;
+
+            // Act
+            TodoSequencer.TodoId = expectedTodoId;
+
+            // Assert
+            Assert.Equal(expectedTodoId, TodoSequencer.TodoId);
+        }
+        [Fact]
         public void TodoIdIncrementWorks()
         {
             // Arrange
@@ -16,33 +28,31 @@ namespace ToDoIt.Tests.Data
             int actualSecondTodoId;
             int actualThirdTodoId;
 
+            TodoSequencer.TodoId = 0;
+
             // Act
-            TodoSequencer.reset();
-            actualFirstTodoId = TodoSequencer.nextTodoId();
-            actualSecondTodoId = TodoSequencer.nextTodoId();
-            actualThirdTodoId = TodoSequencer.nextTodoId();
+            actualFirstTodoId = TodoSequencer.NextTodoId();
+            actualSecondTodoId = TodoSequencer.NextTodoId();
+            actualThirdTodoId = TodoSequencer.NextTodoId();
 
             // Assert
             Assert.Equal(expectedFirstTodoId, actualFirstTodoId);
             Assert.Equal(expectedSecondTodoId, actualSecondTodoId);
             Assert.Equal(expectedThirdTodoId, actualThirdTodoId);
         }
-
         [Fact]
         public void TodoIdResetWorks()
         {
             // Arrange
-            int expectedTodoId = 1;
-            int actualTodoId;
+            int expectedTodoId = 0;
+
+            TodoSequencer.TodoId = 5;
 
             // Act
-            TodoSequencer.nextTodoId();
-            TodoSequencer.nextTodoId();
-            TodoSequencer.reset();
-            actualTodoId = TodoSequencer.nextTodoId();
+            TodoSequencer.Reset();
 
             // Assert
-            Assert.Equal(expectedTodoId, actualTodoId);
+            Assert.Equal(expectedTodoId, TodoSequencer.TodoId);
         }
     }
 }

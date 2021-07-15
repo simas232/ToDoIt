@@ -11,51 +11,58 @@ namespace ToDoIt.Tests.Data
         public void AddTodoWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
+            String expectedFirstDescription = "Buy coconut milk";
+            String expectedSecondDescription = "Go to the gym";
+            String expectedThirdDescription = "Install Visual Studio";
             int expectedFirstTodoId = 1;
             int expectedSecondTodoId = 2;
             int expectedThirdTodoId = 3;
             int expectedSize = 3;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
-            Todo actualFirstTodo = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodo = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodo = actualTodoItems.AddTodo(thirdDescription);
-            Todo[] testTodoItemsArray = actualTodoItems.FindAll();
+            actualTodoItems.TodoArray = new Todo[0];
+
+            // Act
+            Todo actualFirstTodo = actualTodoItems.AddTodo(expectedFirstDescription);
+            Todo actualSecondTodo = actualTodoItems.AddTodo(expectedSecondDescription);
+            Todo actualThirdTodo = actualTodoItems.AddTodo(expectedThirdDescription);
+            Todo[] testTodoItemsArray = actualTodoItems.TodoArray;
 
             // Assert
-            Assert.Equal(firstDescription, actualFirstTodo.Description);
+
+            // Check if Todo objects returned by AddTodo function contain valid todoIds and descriptions
+            Assert.Equal(expectedFirstDescription, actualFirstTodo.Description);
             Assert.Equal(expectedFirstTodoId, actualFirstTodo.TodoId);
-            Assert.Equal(secondDescription, actualSecondTodo.Description);
+            Assert.Equal(expectedSecondDescription, actualSecondTodo.Description);
             Assert.Equal(expectedSecondTodoId, actualSecondTodo.TodoId);
-            Assert.Equal(thirdDescription, actualThirdTodo.Description);
+            Assert.Equal(expectedThirdDescription, actualThirdTodo.Description);
             Assert.Equal(expectedThirdTodoId, actualThirdTodo.TodoId);
 
-            Assert.Equal(firstDescription, testTodoItemsArray[0].Description);
+            // Check if actualTodoItems Todo array contain Todo objects with valid todoIds and descriptions
+            Assert.Equal(expectedFirstDescription, testTodoItemsArray[0].Description);
             Assert.Equal(expectedFirstTodoId, testTodoItemsArray[0].TodoId);
-            Assert.Equal(secondDescription, testTodoItemsArray[1].Description);
+            Assert.Equal(expectedSecondDescription, testTodoItemsArray[1].Description);
             Assert.Equal(expectedSecondTodoId, testTodoItemsArray[1].TodoId);
-            Assert.Equal(thirdDescription, testTodoItemsArray[2].Description);
+            Assert.Equal(expectedThirdDescription, testTodoItemsArray[2].Description);
             Assert.Equal(expectedThirdTodoId, testTodoItemsArray[2].TodoId);
-            // Since three todo tasks are in actualTodoItems, the length of testTodoItemsArray should also be the same
+
+            // Since three Todo tasks were added actualTodoItems, the length of testTodoItemsArray should also be the same
             Assert.Equal(expectedSize, testTodoItemsArray.Length);
         }
         [Fact]
         public void SizeZeroWorks()
         {
             // Arrange
-            int expectedSize = 0;
+            int expectedSize;
             int actualSize;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
+            actualTodoItems.TodoArray = new Todo[0];
+            expectedSize = actualTodoItems.TodoArray.Length;
+
+            // Act
             actualSize = actualTodoItems.Size();
 
             // Assert
@@ -65,9 +72,9 @@ namespace ToDoIt.Tests.Data
         public void SizeNonZeroWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
             int expectedSizeOneTodo = 1;
             int expectedSizeTwoTodos = 2;
             int expectedSizeThreeTodos = 3;
@@ -75,14 +82,22 @@ namespace ToDoIt.Tests.Data
             int actualSizeTwoTodos;
             int actualSizeThreeTodos;
 
-            // Act
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.TodoArray = new Todo[0];// Replicate Clear() function functionality because we do no trust it yet
-            actualTodoItems.AddTodo(firstDescription);
+
+            // Act
+            actualTodoItems.TodoArray = new Todo[1];
+            actualTodoItems.TodoArray[0] = firstTodo;
             actualSizeOneTodo = actualTodoItems.Size();
-            actualTodoItems.AddTodo(secondDescription);
+
+            actualTodoItems.TodoArray = new Todo[2];
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
             actualSizeTwoTodos = actualTodoItems.Size();
-            actualTodoItems.AddTodo(thirdDescription);
+
+            actualTodoItems.TodoArray = new Todo[3];
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
             actualSizeThreeTodos = actualTodoItems.Size();
 
             // Assert
@@ -94,16 +109,17 @@ namespace ToDoIt.Tests.Data
         public void FindAllWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.TodoArray = new Todo[3];
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
 
             // Act
-            TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
             Todo[] testTodoItemsArray = actualTodoItems.FindAll();
 
             // Assert
@@ -113,34 +129,38 @@ namespace ToDoIt.Tests.Data
         public void ClearWorks()
         {
             // Arrange
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+
             int expectedSize = 0;
             int actualSize;
-            String description = "Buy coconut milk";
+
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.TodoArray = new Todo[1];
+            actualTodoItems.TodoArray[0] = firstTodo;
 
             // Act
-            TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.AddTodo(description);
             actualTodoItems.Clear();
-            actualSize = actualTodoItems.Size();
+            actualSize = actualTodoItems.TodoArray.Length;
 
             // Assert
             Assert.Equal(expectedSize, actualSize);
         }
         [Fact]
-        public void FindByIdWorks()
+        public void FindById_EntryFoundWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
+            Todo expectedFirstTodo = new Todo(1, "Buy coconut milk");
+            Todo expectedSecondTodo = new Todo(2, "Go to the gym");
+            Todo expectedThirdTodo = new Todo(3, "Install Visual Studio");
+
+            TodoSequencer.TodoId = 0;
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.TodoArray = new Todo[3];
+            actualTodoItems.TodoArray[0] = expectedFirstTodo;
+            actualTodoItems.TodoArray[1] = expectedSecondTodo;
+            actualTodoItems.TodoArray[2] = expectedThirdTodo;
 
             // Act
-            TodoSequencer.reset();
-            TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
-            Todo expectedFirstTodo = actualTodoItems.AddTodo(firstDescription);
-            Todo expectedSecondTodo = actualTodoItems.AddTodo(secondDescription);
-            Todo expectedThirdTodo = actualTodoItems.AddTodo(thirdDescription);
             Todo actualFirstTodo = actualTodoItems.FindById(1);
             Todo actualSecondTodo = actualTodoItems.FindById(2);
             Todo actualThirdTodo = actualTodoItems.FindById(3);
@@ -151,33 +171,54 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedThirdTodo, actualThirdTodo);
         }
         [Fact]
+        public void FindById_NoEntriesFoundWorks()
+        {
+            // Arrange
+            Todo expectedFirstTodo = new Todo(1, "Buy coconut milk");
+            Todo expectedSecondTodo = new Todo(2, "Go to the gym");
+            Todo expectedThirdTodo = new Todo(3, "Install Visual Studio");
+            Todo expectedTodo = null;
+
+            TodoSequencer.TodoId = 0;
+            TodoItems actualTodoItems = new TodoItems();
+            actualTodoItems.TodoArray = new Todo[3];
+            actualTodoItems.TodoArray[0] = expectedFirstTodo;
+            actualTodoItems.TodoArray[1] = expectedSecondTodo;
+            actualTodoItems.TodoArray[2] = expectedThirdTodo;
+
+            // Act
+            Todo actualTodo = actualTodoItems.FindById(9);
+
+            // Assert
+            Assert.Equal(expectedTodo, actualTodo);
+        }
+        [Fact]
         public void FindByDoneStatus_MixedWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
             bool firstDoneStatus = true;
-            String secondDescription = "Go to the gym";
             bool secondDoneStatus = false;
-            String thirdDescription = "Install Visual Studio";
             bool thirdDoneStatus = false;
-            String fourthDescription = "Eat a small cup of almonds";
             bool fourthDoneStatus = true;
-            String fifthDescription = "Go to the park";
             bool fifthDoneStatus = true;
             int expectedDoneTasksArrayLength = 3;
             int expectedPendingTasksArrayLength = 2;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
-            actualTodoItems.AddTodo(fourthDescription);
-            actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
             // Set Done values for these five newly added tasks
             actualTodoItems.TodoArray[0].Done = firstDoneStatus;
@@ -186,6 +227,7 @@ namespace ToDoIt.Tests.Data
             actualTodoItems.TodoArray[3].Done = fourthDoneStatus;
             actualTodoItems.TodoArray[4].Done = fifthDoneStatus;
 
+            // Act
             Todo[] actualCompletedTodos = actualTodoItems.FindByDoneStatus(true);
             Todo[] actualPendingTodos = actualTodoItems.FindByDoneStatus(false);
 
@@ -203,29 +245,29 @@ namespace ToDoIt.Tests.Data
         public void FindByDoneStatus_AllDoneWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
+
             bool firstDoneStatus = true;
-            String secondDescription = "Go to the gym";
             bool secondDoneStatus = true;
-            String thirdDescription = "Install Visual Studio";
             bool thirdDoneStatus = true;
-            String fourthDescription = "Eat a small cup of almonds";
             bool fourthDoneStatus = true;
-            String fifthDescription = "Go to the park";
             bool fifthDoneStatus = true;
             int expectedPendingTasksArrayLength = 0;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
-            actualTodoItems.AddTodo(fourthDescription);
-            actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
             // Set Done values for these five newly added tasks
             actualTodoItems.TodoArray[0].Done = firstDoneStatus;
@@ -234,6 +276,7 @@ namespace ToDoIt.Tests.Data
             actualTodoItems.TodoArray[3].Done = fourthDoneStatus;
             actualTodoItems.TodoArray[4].Done = fifthDoneStatus;
 
+            // Act
             Todo[] actualCompletedTodos = actualTodoItems.FindByDoneStatus(true);
             Todo[] actualPendingTodos = actualTodoItems.FindByDoneStatus(false);
 
@@ -245,35 +288,35 @@ namespace ToDoIt.Tests.Data
         public void FindByAssignee_FromPersonIdWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
+
             Person firstAssignee = new Person("Shayan", "Alivand", 1);
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            Person thirdAssignee = new Person("Shayan", "Alivand", 1);
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
             Person fifthAssignee = new Person("Bart", "Simpson", 2);
             int expShayansTasksArrayLength = 2;
             int expBartsTasksArrayLength = 1;
             int expIncognitosTasksArrayLength = 0;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
-            actualTodoItems.AddTodo(fourthDescription);
-            actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
             // Set assignee values for these five newly added tasks
             actualTodoItems.TodoArray[0].Assignee = firstAssignee;
-            actualTodoItems.TodoArray[2].Assignee = thirdAssignee;
+            actualTodoItems.TodoArray[2].Assignee = firstAssignee;
             actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
 
+            // Act
             Todo[] shayansTodoItems = actualTodoItems.FindByAssignee(1);
             Todo[] bartsTodoItems = actualTodoItems.FindByAssignee(2);
             Todo[] incognitoTodoItems = actualTodoItems.FindByAssignee(9);
@@ -292,35 +335,37 @@ namespace ToDoIt.Tests.Data
         public void FindByAssignee_FromPersonObjWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
+
             Person firstAssignee = new Person("Shayan", "Alivand", 1);
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
             Person fifthAssignee = new Person("Bart", "Simpson", 2);
+
             Person incognitoAssignee = new Person("Eric", "Eric", 9);
             int expectedShayansTasksArrayLength = 2;
             int expectedBartsTasksArrayLength = 1;
             int expectedIncognitosTasksArrayLength = 0;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
-            actualTodoItems.AddTodo(fourthDescription);
-            actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
             // Set assignee values for these five newly added tasks
             actualTodoItems.TodoArray[0].Assignee = firstAssignee;
             actualTodoItems.TodoArray[2].Assignee = firstAssignee;
             actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
 
+            // Act
             Todo[] shayansTodoItems = actualTodoItems.FindByAssignee(firstAssignee);
             Todo[] bartsTodoItems = actualTodoItems.FindByAssignee(fifthAssignee);
             Todo[] incognitoTodoItems = actualTodoItems.FindByAssignee(incognitoAssignee);
@@ -339,33 +384,34 @@ namespace ToDoIt.Tests.Data
         public void FindUnassignedTodoItemsWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
+
             Person firstAssignee = new Person("Shayan", "Alivand", 1);
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            Person thirdAssignee = new Person("Shayan", "Alivand", 1);
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
             Person fifthAssignee = new Person("Bart", "Simpson", 2);
+
             int expUnassignedTasksArrayLength = 2;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            actualTodoItems.AddTodo(firstDescription);
-            actualTodoItems.AddTodo(secondDescription);
-            actualTodoItems.AddTodo(thirdDescription);
-            actualTodoItems.AddTodo(fourthDescription);
-            actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
             // Set assignee values for these five newly added tasks
             actualTodoItems.TodoArray[0].Assignee = firstAssignee;
-            actualTodoItems.TodoArray[2].Assignee = thirdAssignee;
+            actualTodoItems.TodoArray[2].Assignee = firstAssignee;
             actualTodoItems.TodoArray[4].Assignee = fifthAssignee;
 
+            // Act
             Todo[] actualUnassignedTodoItems = actualTodoItems.FindUnassignedTodoItems();
 
             // Assert
@@ -377,166 +423,168 @@ namespace ToDoIt.Tests.Data
         public void RemoveTodo_FirstEntryWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             int expectedTasksArrayLength = 4;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
-            actualTodoItems.RemoveTodo(actualFirstTodoTask);
+            // Act
+            actualTodoItems.RemoveTodo(firstTodo);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
-            Assert.Equal(actualSecondTodoTask, actualTodoItems.TodoArray[0]);
-            Assert.Equal(actualThirdTodoTask, actualTodoItems.TodoArray[1]);
-            Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[2]);
-            Assert.Equal(actualFifthTodoTask, actualTodoItems.TodoArray[3]);
+            Assert.Equal(secondTodo, actualTodoItems.TodoArray[0]);
+            Assert.Equal(thirdTodo, actualTodoItems.TodoArray[1]);
+            Assert.Equal(fourthTodo, actualTodoItems.TodoArray[2]);
+            Assert.Equal(fifthTodo, actualTodoItems.TodoArray[3]);
         }
         [Fact]
         public void RemoveTodo_MiddleEntryWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             int expectedTasksArrayLength = 4;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
-            actualTodoItems.RemoveTodo(actualThirdTodoTask);
+            // Act
+            actualTodoItems.RemoveTodo(thirdTodo);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
-            Assert.Equal(actualFirstTodoTask, actualTodoItems.TodoArray[0]);
-            Assert.Equal(actualSecondTodoTask, actualTodoItems.TodoArray[1]);
-            Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[2]);
-            Assert.Equal(actualFifthTodoTask, actualTodoItems.TodoArray[3]);
+            Assert.Equal(firstTodo, actualTodoItems.TodoArray[0]);
+            Assert.Equal(secondTodo, actualTodoItems.TodoArray[1]);
+            Assert.Equal(fourthTodo, actualTodoItems.TodoArray[2]);
+            Assert.Equal(fifthTodo, actualTodoItems.TodoArray[3]);
         }
         [Fact]
         public void RemoveTodo_LastEntryWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             int expectedTasksArrayLength = 4;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
-            actualTodoItems.RemoveTodo(actualFifthTodoTask);
+            // Act
+            actualTodoItems.RemoveTodo(fifthTodo);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
-            Assert.Equal(actualFirstTodoTask, actualTodoItems.TodoArray[0]);
-            Assert.Equal(actualSecondTodoTask, actualTodoItems.TodoArray[1]);
-            Assert.Equal(actualThirdTodoTask, actualTodoItems.TodoArray[2]);
-            Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[3]);
+            Assert.Equal(firstTodo, actualTodoItems.TodoArray[0]);
+            Assert.Equal(secondTodo, actualTodoItems.TodoArray[1]);
+            Assert.Equal(thirdTodo, actualTodoItems.TodoArray[2]);
+            Assert.Equal(fourthTodo, actualTodoItems.TodoArray[3]);
         }
         [Fact]
         public void RemoveTodo_ThreeEntriesWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             int expectedTasksArrayLength = 2;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
+
+            // Act
 
             // Remove first, third and fifth entries so only second and fourth original entries should remain
-            actualTodoItems.RemoveTodo(actualFirstTodoTask);
-            actualTodoItems.RemoveTodo(actualThirdTodoTask);
-            actualTodoItems.RemoveTodo(actualFifthTodoTask);
+            actualTodoItems.RemoveTodo(firstTodo);
+            actualTodoItems.RemoveTodo(thirdTodo);
+            actualTodoItems.RemoveTodo(fifthTodo);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
-            Assert.Equal(actualSecondTodoTask, actualTodoItems.TodoArray[0]);
-            Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[1]);
+            Assert.Equal(secondTodo, actualTodoItems.TodoArray[0]);
+            Assert.Equal(fourthTodo, actualTodoItems.TodoArray[1]);
 
         }
         [Fact]
         public void RemoveTodo_AllEntriesWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             int expectedTasksArrayLength = 0;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
+
+            // Act
 
             // Remove all five entries from the object
-            actualTodoItems.RemoveTodo(actualFirstTodoTask);
-            actualTodoItems.RemoveTodo(actualSecondTodoTask);
-            actualTodoItems.RemoveTodo(actualThirdTodoTask);
-            actualTodoItems.RemoveTodo(actualFourthTodoTask);
-            actualTodoItems.RemoveTodo(actualFifthTodoTask);
+            actualTodoItems.RemoveTodo(firstTodo);
+            actualTodoItems.RemoveTodo(secondTodo);
+            actualTodoItems.RemoveTodo(thirdTodo);
+            actualTodoItems.RemoveTodo(fourthTodo);
+            actualTodoItems.RemoveTodo(fifthTodo);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
@@ -545,37 +593,37 @@ namespace ToDoIt.Tests.Data
         public void RemoveTodo_NoEntriesFoundWorks()
         {
             // Arrange
-            String firstDescription = "Buy coconut milk";
-            String secondDescription = "Go to the gym";
-            String thirdDescription = "Install Visual Studio";
-            String fourthDescription = "Eat a small cup of almonds";
-            String fifthDescription = "Go to the park";
+            Todo firstTodo = new Todo(1, "Buy coconut milk");
+            Todo secondTodo = new Todo(2, "Go to the gym");
+            Todo thirdTodo = new Todo(3, "Install Visual Studio");
+            Todo fourthTodo = new Todo(4, "Eat a small cup of almonds");
+            Todo fifthTodo = new Todo(5, "Go to the park");
 
             Todo falseTask = new Todo(9, "Go fishing");
 
             int expectedTasksArrayLength = 5;
 
-            // Act
-            TodoSequencer.reset();
+            TodoSequencer.TodoId = 0;
             TodoItems actualTodoItems = new TodoItems();
-            actualTodoItems.Clear();
+            actualTodoItems.TodoArray = new Todo[5];
 
             // Create five todo tasks using different descriptions
-            Todo actualFirstTodoTask = actualTodoItems.AddTodo(firstDescription);
-            Todo actualSecondTodoTask = actualTodoItems.AddTodo(secondDescription);
-            Todo actualThirdTodoTask = actualTodoItems.AddTodo(thirdDescription);
-            Todo actualFourthTodoTask = actualTodoItems.AddTodo(fourthDescription);
-            Todo actualFifthTodoTask = actualTodoItems.AddTodo(fifthDescription);
+            actualTodoItems.TodoArray[0] = firstTodo;
+            actualTodoItems.TodoArray[1] = secondTodo;
+            actualTodoItems.TodoArray[2] = thirdTodo;
+            actualTodoItems.TodoArray[3] = fourthTodo;
+            actualTodoItems.TodoArray[4] = fifthTodo;
 
+            // Act
             actualTodoItems.RemoveTodo(falseTask);
 
             // Assert
             Assert.Equal(expectedTasksArrayLength, actualTodoItems.TodoArray.Length);
-            Assert.Equal(actualFirstTodoTask, actualTodoItems.TodoArray[0]);
-            Assert.Equal(actualSecondTodoTask, actualTodoItems.TodoArray[1]);
-            Assert.Equal(actualThirdTodoTask, actualTodoItems.TodoArray[2]);
-            Assert.Equal(actualFourthTodoTask, actualTodoItems.TodoArray[3]);
-            Assert.Equal(actualFifthTodoTask, actualTodoItems.TodoArray[4]);
+            Assert.Equal(firstTodo, actualTodoItems.TodoArray[0]);
+            Assert.Equal(secondTodo, actualTodoItems.TodoArray[1]);
+            Assert.Equal(thirdTodo, actualTodoItems.TodoArray[2]);
+            Assert.Equal(fourthTodo, actualTodoItems.TodoArray[3]);
+            Assert.Equal(fifthTodo, actualTodoItems.TodoArray[4]);
         }
     }
 }

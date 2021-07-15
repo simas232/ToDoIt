@@ -10,33 +10,36 @@ namespace ToDoIt.Tests.Data
         public void CheckNextPersonId()
         {
             // Arrange
+            int expFirstPersonId = 1;
+            int expSecondPersonId = 2;
+
             int firstId;
             int secondId;
+            PersonSequencer.PersonId = 0;// run PersonSeqeuncer.Clear() in other way, becausae we do not trust this function yet
+
             // Act
-            PersonSequencer.PersonId = 0;// run PersonSeqeuncer.NextPersonId() in other way, becausae we do not trust this function yet
             firstId = PersonSequencer.NextPersonId();
             secondId = PersonSequencer.NextPersonId();
 
             // Assert
-            Assert.Equal(1, firstId);
-            Assert.Equal(2, secondId);
+            Assert.Equal(expFirstPersonId, firstId);
+            Assert.Equal(expSecondPersonId, secondId);
         }
 
         [Fact]
         public void CheckReset()
         {
             // Arrange
-            int firstIdAfterReset;
+            int expPersonId = 0;
+            int actualPersonId;
+            PersonSequencer.PersonId = 2;
+
             // Act
-            PersonSequencer.NextPersonId();
-            PersonSequencer.NextPersonId();
             PersonSequencer.Reset();
-            firstIdAfterReset = PersonSequencer.NextPersonId();
+            actualPersonId = PersonSequencer.PersonId;
 
             // Assert
-            Assert.Equal(1, firstIdAfterReset);
-
+            Assert.Equal(expPersonId, actualPersonId);
         }
-
     }
 }
