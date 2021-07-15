@@ -16,7 +16,7 @@ namespace ToDoIt.Models
             get { return firstName; }
             set
             {
-                if (string.IsNullOrWhiteSpace(value)) // Set the blank name // invert the result with (!)
+                if (string.IsNullOrEmpty(value)) // Set the blank name // invert the result with (!)
                 {
                     throw new ArgumentException("Empty or whitespace is not allowed.");
                 }
@@ -28,7 +28,7 @@ namespace ToDoIt.Models
             get { return lastName; }
             set
             {
-                if (string.IsNullOrWhiteSpace(value)) // Set the blank name // invert the result with (!)
+                if (string.IsNullOrEmpty(value)) // Set the blank name // invert the result with (!)
                 {
                     throw new ArgumentException("Empty or whitespace is not allowed.");
                 }
@@ -40,8 +40,8 @@ namespace ToDoIt.Models
         // Constructor
         public Person(string firstName, string lastName, int personId)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
             this.personId = personId;
         }
     }
