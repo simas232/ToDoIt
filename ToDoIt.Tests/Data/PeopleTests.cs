@@ -99,6 +99,22 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
+        public void CheckFindAll_Blank()
+        {
+            // Arrange
+            Person[] expPeople = new Person[0];
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+
+            // Act
+            Person[] testPersons = testPeople.FindAll();
+
+            // Assert
+            Assert.Equal(expPeople, testPersons);
+        }
+
+        [Fact]
         public void CheckClear()
         {
             // Arrange
@@ -154,6 +170,39 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(trustedPerson3, actualPerson3);
             Assert.Equal(trustedPerson4, actualPerson4);
             Assert.Equal(trustedPerson5, actualPerson5);
+        }
+
+        [Fact]
+        public void CheckFindById_NoHits()
+        {
+            // Arrange
+            string firstName = "Simons";
+            string lastName = "Gothenburg";
+            string firstName2 = "Anna";
+            string lastName2 = "Blomberg";
+            string firstName3 = "Erik";
+            string lastName3 = "Sweden";
+            string firstName4 = "Linda";
+            string lastName4 = "Larsoon";
+            string firstName5 = "Woody";
+            string lastName5 = "Allen";
+            Person expPerson = null;
+            int expPersonId = 9;
+
+            // Act
+            PersonSequencer.Reset();
+            People testPeople = new People();
+            testPeople.Clear();
+            testPeople.AddPerson(firstName, lastName);
+            testPeople.AddPerson(firstName2, lastName2);
+            testPeople.AddPerson(firstName3, lastName3);
+            testPeople.AddPerson(firstName4, lastName4);
+            testPeople.AddPerson(firstName5, lastName5);
+
+            Person actualPerson = testPeople.FindById(expPersonId);
+
+            // Assert
+            Assert.Equal(expPerson, actualPerson);
         }
 
         [Fact]
