@@ -22,10 +22,11 @@ namespace ToDoIt.Tests.Data
             int expSecondPersonId = 2;
             int expSize = 2;
 
-            // Act
-            PersonSequencer.Reset();
+            PersonSequencer.PersonId = 0;
             People testPeople = new People();
-            testPeople.ArrPerson = new Person[0];// same like Clear function, which we do have tested yet
+            testPeople.ArrPerson = new Person[0];
+
+            // Act
             Person person1 = testPeople.AddPerson(firstName, lastName);
             Person person2 = testPeople.AddPerson(firstName2, lastName2);
             Person[] testPersons = testPeople.ArrPerson;
@@ -59,10 +60,13 @@ namespace ToDoIt.Tests.Data
             int actualSizeNoPersons;
             int actualSizeOnePerson;
 
-            // Act
             People testPeople = new People();
+
+            // Act
+            testPeople.ArrPerson = new Person[0];
             actualSizeNoPersons = testPeople.Size();
-            testPeople.AddPerson(firstName, lastName);
+            testPeople.ArrPerson = new Person[1];
+            testPeople.ArrPerson[0] = new Person(firstName, lastName, 1);
             actualSizeOnePerson = testPeople.Size();
 
             // Assert
@@ -85,13 +89,15 @@ namespace ToDoIt.Tests.Data
             string firstName5 = "Woody";
             string lastName5 = "Allen";
 
-            // Act
             People testPeople = new People();
-            testPeople.AddPerson(firstName, lastName);
-            testPeople.AddPerson(firstName2, lastName2);
-            testPeople.AddPerson(firstName3, lastName3);
-            testPeople.AddPerson(firstName4, lastName4);
-            testPeople.AddPerson(firstName5, lastName5);
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = new Person(firstName, lastName, 1);
+            testPeople.ArrPerson[1] = new Person(firstName2, lastName2, 2);
+            testPeople.ArrPerson[2] = new Person(firstName3, lastName3, 3);
+            testPeople.ArrPerson[3] = new Person(firstName4, lastName4, 4);
+            testPeople.ArrPerson[4] = new Person(firstName5, lastName5, 5);
+
+            // Act
             Person[] testPersons = testPeople.FindAll();
 
             // Assert
@@ -103,9 +109,9 @@ namespace ToDoIt.Tests.Data
         {
             // Arrange
             Person[] expPeople = new Person[0];
-            PersonSequencer.Reset();
+            PersonSequencer.PersonId = 0;
             People testPeople = new People();
-            testPeople.Clear();
+            testPeople.ArrPerson = new Person[0];
 
             // Act
             Person[] testPersons = testPeople.FindAll();
@@ -123,11 +129,13 @@ namespace ToDoIt.Tests.Data
             int expSize = 0;
             int actualSize;
 
-            // Act
             People testPeople = new People();
-            testPeople.AddPerson(firstName, lastName);
+            testPeople.ArrPerson = new Person[1];
+            testPeople.ArrPerson[0] = new Person(firstName, lastName, 1);
+
+            // Act
             testPeople.Clear();
-            actualSize = testPeople.Size();
+            actualSize = testPeople.ArrPerson.Length;
 
             // Assert
             Assert.Equal(expSize, actualSize);
@@ -148,24 +156,30 @@ namespace ToDoIt.Tests.Data
             string firstName5 = "Woody";
             string lastName5 = "Allen";
 
-            // Act
-            PersonSequencer.Reset();
-            People testPeople = new People();
-            testPeople.Clear();
-            Person trustedPerson1 = testPeople.AddPerson(firstName, lastName);
-            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
-            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
-            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
-            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
 
-            Person actualPerson1 = testPeople.FindById(1);
+            PersonSequencer.PersonId = 0;
+            People testPeople = new People();
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
+
+            // Act
+            Person actualPerson = testPeople.FindById(1);
             Person actualPerson2 = testPeople.FindById(2);
             Person actualPerson3 = testPeople.FindById(3);
             Person actualPerson4 = testPeople.FindById(4);
             Person actualPerson5 = testPeople.FindById(5);
 
             // Assert
-            Assert.Equal(trustedPerson1, actualPerson1);
+            Assert.Equal(trustedPerson, actualPerson);
             Assert.Equal(trustedPerson2, actualPerson2);
             Assert.Equal(trustedPerson3, actualPerson3);
             Assert.Equal(trustedPerson4, actualPerson4);
@@ -189,16 +203,22 @@ namespace ToDoIt.Tests.Data
             Person expPerson = null;
             int expPersonId = 9;
 
-            // Act
-            PersonSequencer.Reset();
-            People testPeople = new People();
-            testPeople.Clear();
-            testPeople.AddPerson(firstName, lastName);
-            testPeople.AddPerson(firstName2, lastName2);
-            testPeople.AddPerson(firstName3, lastName3);
-            testPeople.AddPerson(firstName4, lastName4);
-            testPeople.AddPerson(firstName5, lastName5);
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
 
+            PersonSequencer.PersonId = 0;
+            People testPeople = new People();
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
+
+            // Act
             Person actualPerson = testPeople.FindById(expPersonId);
 
             // Assert
@@ -221,20 +241,26 @@ namespace ToDoIt.Tests.Data
             string lastName5 = "Allen";
             int expArrPersonSize = 4;
 
-            // Act
-            PersonSequencer.Reset();
-            People testPeople = new People();
-            testPeople.Clear();
-            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
-            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
-            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
-            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
-            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
 
+            PersonSequencer.PersonId = 0;
+            People testPeople = new People();
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
+
+            // Act
             testPeople.RemovePerson(trustedPerson);
 
             // Assert
-            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(expArrPersonSize, testPeople.ArrPerson.Length);
             Assert.Equal(trustedPerson2, testPeople.ArrPerson[0]);
             Assert.Equal(trustedPerson3, testPeople.ArrPerson[1]);
             Assert.Equal(trustedPerson4, testPeople.ArrPerson[2]);
@@ -257,22 +283,28 @@ namespace ToDoIt.Tests.Data
             string lastName5 = "Allen";
             int expArrPersonSize = 2;
 
-            // Act
-            PersonSequencer.Reset();
-            People testPeople = new People();
-            testPeople.Clear();
-            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
-            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
-            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
-            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
-            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
 
+            PersonSequencer.PersonId = 0;
+            People testPeople = new People();
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
+
+            // Act
             testPeople.RemovePerson(trustedPerson);
             testPeople.RemovePerson(trustedPerson3);
             testPeople.RemovePerson(trustedPerson5);
 
             // Assert
-            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(expArrPersonSize, testPeople.ArrPerson.Length);
             Assert.Equal(trustedPerson2, testPeople.ArrPerson[0]);
             Assert.Equal(trustedPerson4, testPeople.ArrPerson[1]);
         }
@@ -293,16 +325,22 @@ namespace ToDoIt.Tests.Data
             string lastName5 = "Allen";
             int expArrPersonSize = 0;
 
-            // Act
-            PersonSequencer.Reset();
-            People testPeople = new People();
-            testPeople.Clear();
-            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
-            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
-            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
-            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
-            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
 
+            PersonSequencer.PersonId = 0;
+            People testPeople = new People();
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
+
+            // Act
             testPeople.RemovePerson(trustedPerson);
             testPeople.RemovePerson(trustedPerson2);
             testPeople.RemovePerson(trustedPerson3);
@@ -310,7 +348,7 @@ namespace ToDoIt.Tests.Data
             testPeople.RemovePerson(trustedPerson5);
 
             // Assert
-            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(expArrPersonSize, testPeople.ArrPerson.Length);
         }
 
         [Fact]
@@ -319,39 +357,39 @@ namespace ToDoIt.Tests.Data
             // Arrange
             string firstName = "Simons";
             string lastName = "Gothenburg";
-
             string firstName2 = "Anna";
             string lastName2 = "Blomberg";
-
             string firstName3 = "Erik";
             string lastName3 = "Sweden";
-
             string firstName4 = "Linda";
             string lastName4 = "Larsoon";
-
             string firstName5 = "Woody";
             string lastName5 = "Allen";
-
             string firstName323 = "Donald";
             string lastName323 = "Duck";
-
             int expArrPersonSize = 5;
 
-            // Act
-            PersonSequencer.Reset();
+            Person trustedPerson = new Person(firstName, lastName, 1);
+            Person trustedPerson2 = new Person(firstName2, lastName2, 2);
+            Person trustedPerson3 = new Person(firstName3, lastName3, 3);
+            Person trustedPerson4 = new Person(firstName4, lastName4, 4);
+            Person trustedPerson5 = new Person(firstName5, lastName5, 5);
+
+            PersonSequencer.PersonId = 0;
             People testPeople = new People();
-            testPeople.Clear();
-            Person trustedPerson = testPeople.AddPerson(firstName, lastName);
-            Person trustedPerson2 = testPeople.AddPerson(firstName2, lastName2);
-            Person trustedPerson3 = testPeople.AddPerson(firstName3, lastName3);
-            Person trustedPerson4 = testPeople.AddPerson(firstName4, lastName4);
-            Person trustedPerson5 = testPeople.AddPerson(firstName5, lastName5);
+            testPeople.ArrPerson = new Person[5];
+            testPeople.ArrPerson[0] = trustedPerson;
+            testPeople.ArrPerson[1] = trustedPerson2;
+            testPeople.ArrPerson[2] = trustedPerson3;
+            testPeople.ArrPerson[3] = trustedPerson4;
+            testPeople.ArrPerson[4] = trustedPerson5;
             Person donaldDuck = new Person(firstName323, lastName323, 323);
 
+            // Act
             testPeople.RemovePerson(donaldDuck);
 
             // Assert
-            Assert.Equal(expArrPersonSize, testPeople.Size());
+            Assert.Equal(expArrPersonSize, testPeople.ArrPerson.Length);
             Assert.Equal(trustedPerson, testPeople.ArrPerson[0]);
             Assert.Equal(trustedPerson2, testPeople.ArrPerson[1]);
             Assert.Equal(trustedPerson3, testPeople.ArrPerson[2]);
