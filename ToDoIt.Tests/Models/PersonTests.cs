@@ -22,6 +22,7 @@ namespace ToDoIt.Tests.Models
             Assert.Equal(lastName, testPerson.LastName);
             Assert.Equal(personId, testPerson.PersonId);
         }
+
         [Fact]
         public void CheckPersonOneDetails_BlankFirstName()
         {
@@ -37,6 +38,7 @@ namespace ToDoIt.Tests.Models
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
             Assert.Equal("Null or Empty First name is not allowed.", exception.Message);
         }
+
         [Fact]
         public void CheckPersonOneDetails_BlankLastName()
         {

@@ -40,8 +40,6 @@ namespace ToDoIt.Tests.Data
 
             // Assert
             Assert.Equal(expPersonId, actualPersonId);
-
         }
-
     }
 }
