@@ -37,7 +37,7 @@ namespace ToDoIt.Tests.Models
         {
             // Arrange
             int expectedTodoId = 1;
-            String description = "Buy almond milk";
+            String description = "Buy coconut milk";
             bool expectedDoneDefault = false;
 
             // Act
@@ -66,7 +66,7 @@ namespace ToDoIt.Tests.Models
         {
             // Arrange
             int expectedTodoId = 1;
-            String description = "Buy almond milk";
+            String description = "Buy coconut milk";
             Person expectedAssigneeDefault = null;
 
             // Act
