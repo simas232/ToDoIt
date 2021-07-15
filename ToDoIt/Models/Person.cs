@@ -5,9 +5,9 @@ namespace ToDoIt.Models
     public class Person
     {
         // Fields
-        private string firstName; 
+        private string firstName;
         private string lastName;
-        private readonly int personId; // readonly cuz PersonId 
+        private readonly int personId; // readonly cuz PersonId
 
 
         // Properties to link to files (object)
@@ -18,7 +18,7 @@ namespace ToDoIt.Models
             {
                 if (string.IsNullOrEmpty(value)) // Set the blank name // invert the result with (!)
                 {
-                    throw new ArgumentException("Empty or whitespace is not allowed.");
+                    throw new ArgumentException("Null or Empty First name is not allowed.");
                 }
                 firstName = value;
             }
@@ -30,7 +30,7 @@ namespace ToDoIt.Models
             {
                 if (string.IsNullOrEmpty(value)) // Set the blank name // invert the result with (!)
                 {
-                    throw new ArgumentException("Empty or whitespace is not allowed.");
+                    throw new ArgumentException("Null or Empty Last name is not allowed.");
                 }
                 lastName = value;
             }
