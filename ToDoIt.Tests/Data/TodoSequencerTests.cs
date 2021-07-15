@@ -28,8 +28,9 @@ namespace ToDoIt.Tests.Data
             int actualSecondTodoId;
             int actualThirdTodoId;
 
+            TodoSequencer.TodoId = 0;
+
             // Act
-            TodoSequencer.TodoId = 0;// Replicate Reset() function functionality because it is not tested yet
             actualFirstTodoId = TodoSequencer.NextTodoId();
             actualSecondTodoId = TodoSequencer.NextTodoId();
             actualThirdTodoId = TodoSequencer.NextTodoId();
@@ -45,8 +46,9 @@ namespace ToDoIt.Tests.Data
             // Arrange
             int expectedTodoId = 0;
 
-            // Act
             TodoSequencer.TodoId = 5;
+
+            // Act
             TodoSequencer.Reset();
 
             // Assert
