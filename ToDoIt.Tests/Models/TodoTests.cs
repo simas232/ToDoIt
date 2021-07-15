@@ -85,8 +85,9 @@ namespace ToDoIt.Tests.Models
             string lastName = "Doe";
             Person actualAssignee = new Person(firstName, lastName, 1);
 
-            // Act
             Todo actualTodo = new Todo(expectedTodoId, description);
+
+            // Act
             actualTodo.Assignee = actualAssignee;
 
             // Assert
